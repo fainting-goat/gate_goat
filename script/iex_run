@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+docker-compose run -p 4000:4000 --rm app iex -S mix phx.server

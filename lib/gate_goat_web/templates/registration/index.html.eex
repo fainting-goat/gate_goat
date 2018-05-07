@@ -1,0 +1,32 @@
+<h2>Registrations</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sca name</th>
+      <th>Mundane name</th>
+      <th>Membership number</th>
+      <th>Group name</th>
+      <th>Feast option</th>
+      <th>Camping Option</th>
+      <th>Waiver</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for registration <- @registrations do %>
+    <tr>
+      <td><%= registration.sca_name %></td>
+      <td><%= registration.mundane_name %></td>
+      <td><%= registration.membership_number %></td>
+      <td><%= registration.group_name %></td>
+      <td><%= registration.feast_option %></td>
+      <td><%= registration.camping_option %></td>
+      <td><%= registration.waiver %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Registration", to: registration_path(@conn, :new) %></span>
