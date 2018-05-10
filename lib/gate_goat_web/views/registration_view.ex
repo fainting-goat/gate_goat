@@ -9,6 +9,10 @@ defmodule GateGoatWeb.RegistrationView do
     GateGoat.Events.get_event!(event_id).event_name
   end
 
+  def checks_payable(event_id) do
+    GateGoat.Events.get_event!(event_id).checks_payable
+  end
+
   defp get_event_fee(event_id) do
     GateGoat.Events.get_event!(event_id).event_fee
   end

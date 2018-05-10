@@ -2,6 +2,7 @@
 
 <div>Your confirmation number is: <%= @registration.id %></div>
 <div>You will pay: <%= payment(@registration) %></div>
+<div>Check should be made out to: <%= checks_payable(@registration.event_id) %></div>
 
 <ul>
 

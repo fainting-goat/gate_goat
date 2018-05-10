@@ -36,6 +36,12 @@
     </div>
 
   <div class="form-group">
+      <%= label f, :checks_payable, class: "control-label" %>
+      <%= text_input f, :checks_payable, class: "form-control" %>
+      <%= error_tag f, :checks_payable %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
