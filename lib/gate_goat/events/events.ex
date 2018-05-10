@@ -6,6 +6,7 @@ defmodule GateGoat.Events do
   import Ecto.Query, warn: false
   alias GateGoat.Repo
 
+  alias GateGoat.Events
   alias GateGoat.Events.Registration
 
   @doc """
@@ -17,6 +18,9 @@ defmodule GateGoat.Events do
       [%Registration{}, ...]
 
   """
+  def list_registrations(event_id) do
+    Repo.all(from c in Registration, where: c.event_id == ^event_id)
+  end
   def list_registrations do
     Repo.all(Registration)
   end
@@ -49,9 +53,11 @@ defmodule GateGoat.Events do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_registration(attrs \\ %{}) do
-    %Registration{}
+  def create_registration(attrs \\ %{}, event_id) do
+    registration = %Registration{}
+    |> Repo.preload(:event)
     |> Registration.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:event, get_event!(event_id))
     |> Repo.insert()
   end
 
@@ -98,7 +104,106 @@ defmodule GateGoat.Events do
       %Ecto.Changeset{source: %Registration{}}
 
   """
-  def change_registration(%Registration{} = registration) do
+  def change_registration(%Registration{} = registration, params) do
+    Registration.changeset(registration, params)
+  end
+    def change_registration(%Registration{} = registration) do
     Registration.changeset(registration, %{})
+  end
+
+  alias GateGoat.Events.Event
+
+  @doc """
+  Returns the list of events.
+
+  ## Examples
+
+      iex> list_events()
+      [%Event{}, ...]
+
+  """
+  def list_events do
+    Repo.all(Event)
+  end
+
+  @doc """
+  Gets a single event.
+
+  Raises `Ecto.NoResultsError` if the Event does not exist.
+
+  ## Examples
+
+      iex> get_event!(123)
+      %Event{}
+
+      iex> get_event!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_event!(id), do: Repo.get!(Event, id)
+
+  @doc """
+  Creates a event.
+
+  ## Examples
+
+      iex> create_event(%{field: value})
+      {:ok, %Event{}}
+
+      iex> create_event(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_event(attrs \\ %{}) do
+    %Event{}
+    |> Event.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a event.
+
+  ## Examples
+
+      iex> update_event(event, %{field: new_value})
+      {:ok, %Event{}}
+
+      iex> update_event(event, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_event(%Event{} = event, attrs) do
+    event
+    |> Event.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Event.
+
+  ## Examples
+
+      iex> delete_event(event)
+      {:ok, %Event{}}
+
+      iex> delete_event(event)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_event(%Event{} = event) do
+    Repo.delete(event)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking event changes.
+
+  ## Examples
+
+      iex> change_event(event)
+      %Ecto.Changeset{source: %Event{}}
+
+  """
+  def change_event(%Event{} = event) do
+    Event.changeset(event, %{})
   end
 end

@@ -1,7 +1,7 @@
 <h2>Confirmation</h2>
 
 <div>Your confirmation number is: <%= @registration.id %></div>
-<div>You will pay: <%= payment(@registration.feast_option) %></div>
+<div>You will pay: <%= payment(@registration) %></div>
 
 <ul>
 
@@ -40,5 +40,6 @@
     <%= @registration.waiver %>
   </li>
 
+  <span><%= link "Back", to: registration_path(@conn, :index, event_id: @registration.event_id) %></span>
 </ul>
 

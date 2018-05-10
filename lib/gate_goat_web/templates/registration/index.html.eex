@@ -1,4 +1,4 @@
-<h2>Registrations</h2>
+<h2>Registrations for <%= event_name(@event_id) %></h2>
 
 <table class="table">
   <thead>
@@ -10,8 +10,6 @@
       <th>Feast option</th>
       <th>Camping Option</th>
       <th>Waiver</th>
-
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -29,4 +27,5 @@
   </tbody>
 </table>
 
-<span><%= link "New Registration", to: registration_path(@conn, :new) %></span>
+<span><%= link "New Registration", to: registration_path(@conn, :new, event_id: @event_id) %></span> |
+<span><%= link "Back", to: gate_goat_path(@conn, :index) %></span>

@@ -13,7 +13,5 @@ defmodule GateGoat.Repo.Migrations.CreateRegistrations do
 
       timestamps()
     end
-
-    create unique_index(:registrations, [:membership_number])
   end
 end

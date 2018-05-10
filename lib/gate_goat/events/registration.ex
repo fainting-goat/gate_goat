@@ -2,6 +2,7 @@ defmodule GateGoat.Events.Registration do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias GateGoat.Events.Event
 
   schema "registrations" do
     field :group_name, :string
@@ -11,6 +12,7 @@ defmodule GateGoat.Events.Registration do
     field :waiver, :boolean, default: false
     field :feast_option, :boolean, default: false
     field :camping_option, :boolean, default: false
+    belongs_to :event, Event
 
     timestamps()
   end

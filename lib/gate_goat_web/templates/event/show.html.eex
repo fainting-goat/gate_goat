@@ -1,0 +1,33 @@
+<h2>Confirmation</h2>
+
+<ul>
+
+  <li>
+    <strong>Event name:</strong>
+    <%= @event.event_name %>
+  </li>
+
+  <li>
+    <strong>Event Date:</strong>
+    <%= @event.event_date %>
+  </li>
+
+  <li>
+    <strong>Event Fee:</strong>
+    <%= @event.event_fee %>
+  </li>
+
+  <li>
+    <strong>Feast Fee:</strong>
+    <%= @event.feast_fee %>
+  </li>
+
+  <li>
+  <strong>Camping Fee:</strong>
+  <%= @event.camping_fee %>
+  </li>
+</ul>
+
+<span><%= link "Edit", to: event_path(@conn, :edit, @event) %></span>
+<span><%= link "Back", to: event_path(@conn, :index) %></span>
+

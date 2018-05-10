@@ -16,7 +16,10 @@ defmodule GateGoatWeb.Router do
   scope "/", GateGoatWeb do
     pipe_through :browser # Use the default browser stack
 
-    resources "/", RegistrationController
+    get "/", GateGoatController, :index
+    get "/event/:id", GateGoatController, :register
+    resources "/register", RegistrationController, only: [:index, :show, :create, :new]
+#    resources "/events", EventController
   end
 
   # Other scopes may use custom stacks.
