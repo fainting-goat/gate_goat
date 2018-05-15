@@ -1,1 +1,4 @@
-/* This file is for your main application css. */
+.form-errors-present {
+    background-color: #f2dede !important;
+    color: #a94442 !important;
+}

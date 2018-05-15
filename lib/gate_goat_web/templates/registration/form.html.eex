@@ -7,25 +7,25 @@
 
   <div class="form-group">
     <%= label f, :sca_name, class: "control-label" %>
-    <%= text_input f, :sca_name, class: "form-control" %>
+    <%= render_with_error :text_input, f, :sca_name %>
     <%= error_tag f, :sca_name %>
   </div>
 
   <div class="form-group">
     <%= label f, :mundane_name, class: "control-label" %>
-    <%= text_input f, :mundane_name, class: "form-control" %>
+    <%= render_with_error :text_input, f, :mundane_name %>
     <%= error_tag f, :mundane_name %>
   </div>
 
   <div class="form-group">
     <%= label f, :membership_number, class: "control-label" %>
-    <%= text_input f, :membership_number, class: "form-control" %>
+    <%= render_with_error :text_input, f, :membership_number %>
     <%= error_tag f, :membership_number %>
   </div>
 
   <div class="form-group">
     <%= label f, :group_name, class: "control-label" %>
-    <%= text_input f, :group_name, class: "form-control" %>
+    <%= render_with_error :text_input, f, :group_name %>
     <%= error_tag f, :group_name %>
   </div>
 
