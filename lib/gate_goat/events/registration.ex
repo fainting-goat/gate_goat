@@ -22,6 +22,6 @@ defmodule GateGoat.Events.Registration do
     registration
     |> cast(attrs, [:sca_name, :mundane_name, :membership_number, :group_name, :waiver, :feast_option, :camping_option])
     |> validate_required([:sca_name, :mundane_name, :membership_number, :group_name, :waiver, :feast_option, :camping_option])
-    |> validate_format(:membership_number, ~r/[0-9]/, [message: "Membership number must be a number."])
+    |> validate_format(:membership_number, ~r/^\d+$/, [message: "Membership number must be a number."])
   end
 end

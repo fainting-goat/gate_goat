@@ -2,3 +2,16 @@
     background-color: #f2dede !important;
     color: #a94442 !important;
 }
+
+.logo {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    margin-bottom: 1em;
+    background-image: url("/images/logo.jpg");
+    background-size: 200px 200px;
+}
+
+.logo-header {
+    padding-left: 10px;
+}
