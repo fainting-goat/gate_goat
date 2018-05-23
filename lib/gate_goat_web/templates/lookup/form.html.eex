@@ -1,0 +1,16 @@
+<%= form_for @conn, lookup_path(@conn, :lookup), [as: :search], fn f -> %>
+  <%= if @error do %>
+    <div class="alert alert-danger">
+      <p>Please enter a valid confirmation number.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :confirmation_number, class: "control-label" %>
+    <%= text_input f, :confirmation_number, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

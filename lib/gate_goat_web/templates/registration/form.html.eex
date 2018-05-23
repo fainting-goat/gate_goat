@@ -32,6 +32,8 @@
   <div><p>Feast? Yes <%= radio_button(f, :feast_option, "true") %> No <%= radio_button(f, :feast_option, "false") %></p></div>
   <div><p>Camping? Yes <%= radio_button(f, :camping_option, "true") %> No <%= radio_button(f, :camping_option, "false") %></p></div>
 
+  <%= render "waiver.html" %>
+
   <div class="form-group">
     <%= checkbox f, :waiver %>
     I have read and agree to the terms of the waiver.

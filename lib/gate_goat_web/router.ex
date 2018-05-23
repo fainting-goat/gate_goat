@@ -17,6 +17,8 @@ defmodule GateGoatWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", GateGoatController, :index
+    get "/lookup", LookupController, :lookup
+    post "/lookup", LookupController, :lookup
     get "/event/:id", GateGoatController, :register
     resources "/register", RegistrationController, only: [:index, :show, :create, :new]
 #    resources "/events", EventController

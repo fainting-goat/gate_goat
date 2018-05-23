@@ -40,6 +40,7 @@ defmodule GateGoat.Events do
 
   """
   def get_registration!(id), do: Repo.get!(Registration, id)
+  def get_registration(id), do: Repo.get(Registration, id)
 
   @doc """
   Creates a registration.

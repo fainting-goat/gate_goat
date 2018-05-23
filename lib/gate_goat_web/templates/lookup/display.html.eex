@@ -1,0 +1,55 @@
+<ul>
+  <li>
+    <strong>Confirmation Number:</strong>
+    <%= @registration.id %>
+  </li>
+
+  <li>
+    <strong>Sca name:</strong>
+    <%= @registration.sca_name %>
+  </li>
+
+  <li>
+    <strong>Mundane name:</strong>
+    <%= @registration.mundane_name %>
+  </li>
+
+  <li>
+    <strong>Membership number:</strong>
+    <%= @registration.membership_number %>
+  </li>
+
+  <li>
+    <strong>Group name:</strong>
+    <%= @registration.group_name %>
+  </li>
+
+  <li>
+  <strong>Feast:</strong>
+  <%= @registration.feast_option %>
+  </li>
+
+  <li>
+    <strong>Camping:</strong>
+    <%= @registration.camping_option %>
+  </li>
+
+  <li>
+    <strong>Waiver:</strong>
+    <%= @registration.waiver %>
+  </li>
+
+  <li>
+    <strong>Payment:</strong>
+    $<%= payment(@registration) %>
+  </li>
+
+  <div><%= link "Back", to: lookup_path(@conn, :lookup) %></div>
+
+  <hr>
+  <div>
+    <h3>Lookup another</h3>
+    <%= render GateGoatWeb.LookupView, "form.html", conn: @conn, error: false %>
+  </div>
+</ul>
+

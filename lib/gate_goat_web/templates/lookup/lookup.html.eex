@@ -1,0 +1,1 @@
+<%= render GateGoatWeb.LookupView, "form.html", conn: @conn, error: @error %>
