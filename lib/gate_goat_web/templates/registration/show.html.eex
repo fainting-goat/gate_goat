@@ -41,6 +41,6 @@
     <%= @registration.waiver %>
   </li>
 
-  <span><%= link "Back", to: gate_goat_path(@conn, :index, event_id: @registration.event_id) %></span>
+  <span><%= link "Back", to: gate_goat_path(@conn, :index) %></span>
 </ul>
 
