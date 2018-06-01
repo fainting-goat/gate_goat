@@ -127,6 +127,10 @@ defmodule GateGoat.Events do
     Repo.all(Event)
   end
 
+  def list_current_events do
+    Repo.all(from c in Event, where: c.event_date >= ^DateTime.utc_now())
+  end
+
   @doc """
   Gets a single event.
 
