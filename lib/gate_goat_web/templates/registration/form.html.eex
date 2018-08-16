@@ -12,9 +12,9 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :mundane_name, class: "control-label" %>
-    <%= render_with_error :text_input, f, :mundane_name %>
-    <%= error_tag f, :mundane_name %>
+    <%= label f, :legal_name, class: "control-label" %>
+    <%= render_with_error :text_input, f, :legal_name %>
+    <%= error_tag f, :legal_name %>
   </div>
 
   <div class="form-group">

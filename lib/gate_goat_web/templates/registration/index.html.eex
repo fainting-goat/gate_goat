@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Sca name</th>
-      <th>Mundane name</th>
+      <th>Legal name</th>
       <th>Membership number</th>
       <th>Group name</th>
       <th>Feast option</th>
@@ -16,7 +16,7 @@
 <%= for registration <- @registrations do %>
     <tr>
       <td><%= registration.sca_name %></td>
-      <td><%= registration.mundane_name %></td>
+      <td><%= registration.legal_name %></td>
       <td><%= registration.membership_number %></td>
       <td><%= registration.group_name %></td>
       <td><%= registration.feast_option %></td>

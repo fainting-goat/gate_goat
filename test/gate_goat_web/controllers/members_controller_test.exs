@@ -3,9 +3,9 @@ defmodule GateGoatWeb.MembersControllerTest do
 
   alias GateGoat.Events
 
-  @create_attrs %{group_name: "some group_name", membership_number: "some membership_number", mundane_name: "some mundane_name", sca_name: "some sca_name", waiver: true}
-  @update_attrs %{group_name: "some updated group_name", membership_number: "some updated membership_number", mundane_name: "some updated mundane_name", sca_name: "some updated sca_name", waiver: false}
-  @invalid_attrs %{group_name: nil, membership_number: nil, mundane_name: nil, sca_name: nil, waiver: nil}
+  @create_attrs %{group_name: "some group_name", membership_number: "some membership_number", legal_name: "some legal_name", sca_name: "some sca_name", waiver: true}
+  @update_attrs %{group_name: "some updated group_name", membership_number: "some updated membership_number", legal_name: "some updated legal_name", sca_name: "some updated sca_name", waiver: false}
+  @invalid_attrs %{group_name: nil, membership_number: nil, legal_name: nil, sca_name: nil, waiver: nil}
 
   def fixture(:members) do
     {:ok, members} = Events.create_members(@create_attrs)
