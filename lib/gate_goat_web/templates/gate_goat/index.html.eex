@@ -6,9 +6,7 @@
       <th></th>
       <th>Event Name</th>
       <th>Event Date</th>
-      <th>Event Fee</th>
-      <th>Feast Fee</th>
-      <th>Camping Fee</th>
+      <th>Event Fees</th>
     </tr>
   </thead>
   <tbody>
@@ -19,9 +17,11 @@
       </td>
       <td><%= event.event_name %></td>
       <td><%= event.event_date %></td>
-      <td><%= event.event_fee %></td>
-      <td><%= event.feast_fee %></td>
-      <td><%= event.camping_fee %></td>
+      <td>
+        <p>Registration: $<%= event.event_fee %></p>
+        <p>Feast: $<%= event.feast_fee %></p>
+        <p>Camping: $<%= event.camping_fee %></p>
+      </td>
     </tr>
 <% end %>
   </tbody>
