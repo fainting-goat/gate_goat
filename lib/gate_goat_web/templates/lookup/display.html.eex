@@ -10,8 +10,8 @@
   </li>
 
   <li>
-    <strong>Mundane name:</strong>
-    <%= @registration.mundane_name %>
+    <strong>Legal name:</strong>
+    <%= @registration.legal_name %>
   </li>
 
   <li>

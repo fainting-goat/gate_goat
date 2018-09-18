@@ -4,7 +4,7 @@ defmodule GateGoat.Repo.Migrations.CreateRegistrations do
   def change do
     create table(:registrations) do
       add :sca_name, :string, null: false
-      add :mundane_name, :string, null: false
+      add :legal_name, :string, null: false
       add :membership_number, :string, null: false
       add :group_name, :string, null: true
       add :waiver, :boolean, default: false, null: false

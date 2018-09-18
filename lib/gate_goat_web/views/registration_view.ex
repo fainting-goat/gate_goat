@@ -28,13 +28,15 @@ defmodule GateGoatWeb.RegistrationView do
     GateGoat.Events.get_event!(event_id).event_fee
   end
 
-  defp get_feast_fee(_, false), do: 0
-  defp get_feast_fee(event_id, true) do
+  def get_feast_fee(_, false), do: 0
+  def get_feast_fee(event_id, true) do
     GateGoat.Events.get_event!(event_id).feast_fee
   end
+  def get_feast_fee(event_id), do: get_feast_fee(event_id, true)
 
-  defp get_camping_fee(_, false), do: 0
-  defp get_camping_fee(event_id, true) do
+  def get_camping_fee(_, false), do: 0
+  def get_camping_fee(event_id, true) do
     GateGoat.Events.get_event!(event_id).camping_fee
   end
+  def get_camping_fee(event_id), do: get_feast_fee(event_id, true)
 end
