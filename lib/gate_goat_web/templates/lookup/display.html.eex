@@ -20,6 +20,11 @@
   </li>
 
   <li>
+    <strong>Membership expiration date:</strong>
+    <%= @registration.membership_expiration_date %>
+  </li>
+
+  <li>
     <strong>Group name:</strong>
     <%= @registration.group_name %>
   </li>

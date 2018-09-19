@@ -24,6 +24,13 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :membership_expiration_date, class: "control-label" %>
+    <%= render_with_error :text_input, f, :membership_expiration_date %>
+    (yyyy-mm-dd)
+    <%= error_tag f, :membership_expiration_date %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :group_name, class: "control-label" %>
     <%= render_with_error :text_input, f, :group_name %>
     <%= error_tag f, :group_name %>
