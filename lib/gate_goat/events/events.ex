@@ -55,6 +55,7 @@ defmodule GateGoat.Events do
 
   """
   def create_registration(attrs \\ %{}, event_id) do
+    IO.inspect attrs
     registration = %Registration{}
     |> Repo.preload(:event)
     |> Registration.changeset(attrs)

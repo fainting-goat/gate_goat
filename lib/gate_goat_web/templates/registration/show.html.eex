@@ -16,30 +16,40 @@
     <%= @registration.legal_name %>
   </li>
 
-  <li>
-    <strong>Membership number:</strong>
-    <%= @registration.membership_number %>
-  </li>
+  <%= if @registration.member_option == true do %>
+    <li>
+      <strong>Membership number:</strong>
+      <%= @registration.membership_number %>
+    </li>
 
-  <li>
-    <strong>Membership expiration date:</strong>
-    <%= @registration.membership_expiration_date %>
-  </li>
+    <li>
+      <strong>Membership expiration date:</strong>
+      <%= @registration.membership_expiration_date %>
+    </li>
+  <%= else %>
+    <li>
+      <strong>Non-Member:</strong> $5 surcharge added
+    </li>
+  <% end %>
 
   <li>
     <strong>Group name:</strong>
     <%= @registration.group_name %>
   </li>
 
-  <li>
-  <strong>Feast:</strong>
-  <%= @registration.feast_option %>
-  </li>
+  <%= if display_feast_option(@registration.event_id) do %>
+    <li>
+    <strong>Feast:</strong>
+    <%= @registration.feast_option %>
+    </li>
+  <% end %>
 
-  <li>
-    <strong>Camping:</strong>
-    <%= @registration.camping_option %>
-  </li>
+  <%= if display_camping_option(@registration.event_id) do %>
+    <li>
+      <strong>Camping:</strong>
+      <%= @registration.camping_option %>
+    </li>
+  <% end %>
 
   <li>
     <strong>Waiver:</strong>
