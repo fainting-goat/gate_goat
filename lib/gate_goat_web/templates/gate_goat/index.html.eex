@@ -19,8 +19,8 @@
       <td><%= event.event_date %></td>
       <td>
         <p>Registration: $<%= event.event_fee %></p>
-        <p>Feast: $<%= event.feast_fee %></p>
-        <p>Camping: $<%= event.camping_fee %></p>
+        <%= if event.feast_fee != 0 do %><p>Feast: $<%= event.feast_fee %></p><% end %>
+        <%= if event.camping_fee != 0 do %><p>Camping: $<%= event.camping_fee %></p><% end %>
       </td>
     </tr>
 <% end %>

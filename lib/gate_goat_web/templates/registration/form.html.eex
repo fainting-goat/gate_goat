@@ -17,10 +17,19 @@
     <%= error_tag f, :legal_name %>
   </div>
 
+  <div><p>Are you a member? Yes <%= radio_button(f, :member_option, "true") %> No <%= radio_button(f, :member_option, "false") %></p></div>
+
   <div class="form-group">
     <%= label f, :membership_number, class: "control-label" %>
     <%= render_with_error :text_input, f, :membership_number %>
     <%= error_tag f, :membership_number %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :membership_expiration_date, class: "control-label" %>
+    <%= render_with_error :text_input, f, :membership_expiration_date %>
+    (yyyy-mm-dd)
+    <%= error_tag f, :membership_expiration_date %>
   </div>
 
   <div class="form-group">
@@ -29,8 +38,13 @@
     <%= error_tag f, :group_name %>
   </div>
 
-  <div><p>Feast?  ($<%= get_feast_fee(@event_id) %>) Yes <%= radio_button(f, :feast_option, "true") %> No <%= radio_button(f, :feast_option, "false") %></p></div>
-  <div><p>Camping? ($<%= get_camping_fee(@event_id) %>) Yes <%= radio_button(f, :camping_option, "true") %> No <%= radio_button(f, :camping_option, "false") %></p></div>
+  <%= if display_feast_option(@event_id) do %>
+    <div><p>Feast?  ($<%= get_feast_fee(@event_id) %>) Yes <%= radio_button(f, :feast_option, "true") %> No <%= radio_button(f, :feast_option, "false") %></p></div>
+  <% end %>
+
+  <%= if display_camping_option(@event_id) do %>
+    <div><p>Camping? ($<%= get_camping_fee(@event_id) %>) Yes <%= radio_button(f, :camping_option, "true") %> No <%= radio_button(f, :camping_option, "false") %></p></div>
+  <% end %>
 
   <%= render "waiver.html" %>
 

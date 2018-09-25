@@ -19,8 +19,8 @@
       <td><%= registration.legal_name %></td>
       <td><%= registration.membership_number %></td>
       <td><%= registration.group_name %></td>
-      <td><%= registration.feast_option %></td>
-      <td><%= registration.camping_option %></td>
+      <%= if display_feast_option(@event_id) do %><td><%= registration.feast_option %></td><% end %>
+      <%= if display_camping_option(@event_id) do %><td><%= registration.camping_option %></td><% end %>
       <td><%= registration.waiver %></td>
     </tr>
 <% end %>
