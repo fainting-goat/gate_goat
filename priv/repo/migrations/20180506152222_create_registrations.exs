@@ -12,6 +12,7 @@ defmodule GateGoat.Repo.Migrations.CreateRegistrations do
       add :feast_option, :boolean, default: false
       add :camping_option, :boolean, default: false
       add :member_option, :boolean, default: true
+      add :verified, :boolean, default: false
 
       timestamps()
     end

@@ -75,6 +75,8 @@ defmodule GateGoat.Events do
 
   """
   def update_registration(%Registration{} = registration, attrs) do
+    IO.inspect registration
+    IO.inspect attrs
     registration
     |> Registration.changeset(attrs)
     |> Repo.update()
