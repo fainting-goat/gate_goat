@@ -1,3 +1,8 @@
+<h3><strong>Payment:</strong> $<%= payment(@registration) %></h3>
+
+<%= link "Paid", class: "btn btn-primary", to: lookup_path(@conn, :lookup, %{registration: @registration}) %>
+  <%= link "Cancel", class: "btn btn-primary", to: lookup_path(@conn, :lookup) %>
+
 <ul>
   <li>
     <strong>Confirmation Number:</strong>
@@ -12,6 +17,11 @@
   <li>
     <strong>Legal name:</strong>
     <%= @registration.legal_name %>
+  </li>
+
+  <li>
+    <strong>Member?:</strong>
+    <%= @registration.member_option %>
   </li>
 
   <li>
@@ -43,18 +53,5 @@
     <strong>Waiver:</strong>
     <%= @registration.waiver %>
   </li>
-
-  <li>
-    <strong>Payment:</strong>
-    $<%= payment(@registration) %>
-  </li>
-
-  <div><%= link "Back", to: lookup_path(@conn, :lookup) %></div>
-
-  <hr>
-  <div>
-    <h3>Lookup another</h3>
-    <%= render GateGoatWeb.LookupView, "form.html", conn: @conn, error: false %>
-  </div>
 </ul>
 

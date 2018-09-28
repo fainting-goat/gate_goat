@@ -1,8 +1,13 @@
-<h2>Confirmation</h2>
+<h2>You are now registered.</h2>
+ <h2>Confirmation Number: <%= @registration.id %></h2>
 
-<div>Your confirmation number is: <%= @registration.id %></div>
+<div><b>Please stay on this screen.  You will need to show both your confirmation number and blue card.</b></div>
+
+<hr>
+
+<h3>Payment</h3>
 <div>You will pay: $<%= payment(@registration) %></div>
-<div>Check should be made out to: <%= checks_payable(@registration.event_id) %></div>
+<div>Please make all checks out to: <%= checks_payable(@registration.event_id) %></div>
 
 <ul>
 
@@ -50,11 +55,6 @@
       <%= @registration.camping_option %>
     </li>
   <% end %>
-
-  <li>
-    <strong>Waiver:</strong>
-    <%= @registration.waiver %>
-  </li>
 
   <span><%= link "Back", to: gate_goat_path(@conn, :index) %></span>
 </ul>

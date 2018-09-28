@@ -1,6 +1,8 @@
 defmodule GateGoatWeb.RegistrationView do
   use GateGoatWeb, :view
 
+  #todo: turn boolean into registered/not registered
+
   def render_with_error(type, form, field) do
 
     if form.errors[field] do

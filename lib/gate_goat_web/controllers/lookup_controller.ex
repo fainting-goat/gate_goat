@@ -13,6 +13,14 @@ defmodule GateGoatWeb.LookupController do
       render_results(conn)
     end
   end
+  def lookup(conn, %{"registration" => registration_id}) do
+    registration = Events.get_registration(registration_id)
+    changeset = Events.update_registration(registration, %{verified: true})
+
+    conn
+    |> put_flash(:info, "User verified.")
+    |> render("lookup.html", verified: true, error: false)
+  end
   def lookup(conn, _params) do
     render(conn, "lookup.html", error: false)
   end
