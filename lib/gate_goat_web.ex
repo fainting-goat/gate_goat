@@ -21,8 +21,9 @@ defmodule GateGoatWeb do
     quote do
       use Phoenix.Controller, namespace: GateGoatWeb
       import Plug.Conn
-      import GateGoatWeb.Router.Helpers
       import GateGoatWeb.Gettext
+
+      alias GateGoatWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -37,9 +38,10 @@ defmodule GateGoatWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import GateGoatWeb.Router.Helpers
       import GateGoatWeb.ErrorHelpers
       import GateGoatWeb.Gettext
+
+      alias GateGoatWeb.Router.Helpers, as: Routes
     end
   end
 

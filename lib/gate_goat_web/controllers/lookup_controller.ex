@@ -2,8 +2,6 @@ defmodule GateGoatWeb.LookupController do
   use GateGoatWeb, :controller
 
   alias GateGoat.Events
-  alias GateGoat.Events.Event
-  alias GateGoat.Events.Registration
 
   def lookup(conn, %{"search" => %{"confirmation_number" => registration_id}}) do
     if Regex.match?(~r/^\d+$/, registration_id) do
@@ -15,7 +13,7 @@ defmodule GateGoatWeb.LookupController do
   end
   def lookup(conn, %{"registration" => registration_id}) do
     registration = Events.get_registration(registration_id)
-    changeset = Events.update_registration(registration, %{verified: true})
+    Events.update_registration(registration, %{verified: true})
 
     conn
     |> put_flash(:info, "User verified.")

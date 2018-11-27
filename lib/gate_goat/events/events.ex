@@ -5,8 +5,6 @@ defmodule GateGoat.Events do
 
   import Ecto.Query, warn: false
   alias GateGoat.Repo
-
-  alias GateGoat.Events
   alias GateGoat.Events.Registration
 
   @doc """
@@ -55,7 +53,7 @@ defmodule GateGoat.Events do
 
   """
   def create_registration(attrs \\ %{}, event_id) do
-    registration = %Registration{}
+    %Registration{}
     |> Repo.preload(:event)
     |> Registration.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:event, get_event!(event_id))

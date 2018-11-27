@@ -1,5 +1,7 @@
 defmodule GateGoat.Repo do
-  use Ecto.Repo, otp_app: :gate_goat
+  use Ecto.Repo,
+      otp_app: :gate_goat,
+      adapter: Ecto.Adapters.Postgres
 
   @doc """
   Dynamically loads the repository url from the

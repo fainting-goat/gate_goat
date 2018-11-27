@@ -11,7 +11,6 @@ config :logger, level: :warn
 
 # Configure your database
 config :gate_goat, GateGoat.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
   database: "gate_goat_dev",

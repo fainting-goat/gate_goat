@@ -33,7 +33,7 @@ defmodule GateGoat.Events.Registration do
     |> validate_membership_info(attrs)
   end
 
-  def validate_membership_info(changeset, %{"member_option" => "true"} = attrs) do
+  def validate_membership_info(changeset, %{"member_option" => "true"}) do
     changeset
     |> validate_required([:membership_number, :membership_expiration_date])
     |> validate_format(:membership_number, ~r/^\d+$/, [message: "Membership number must be a number."])

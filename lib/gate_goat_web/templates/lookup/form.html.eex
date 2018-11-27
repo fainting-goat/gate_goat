@@ -1,4 +1,4 @@
-<%= form_for @conn, lookup_path(@conn, :lookup), [as: :search], fn f -> %>
+<%= form_for @conn, Routes.lookup_path(@conn, :lookup), [as: :search], fn f -> %>
   <%= if @error do %>
     <div class="alert alert-danger">
       <p>Please enter a valid confirmation number.</p>
