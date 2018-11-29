@@ -1,7 +1,7 @@
 <h3><strong>Payment:</strong> $<%= payment(@registration) %></h3>
 
-<%= link "Paid", class: "btn btn-primary", to: Routes.lookup_path(@conn, :lookup, %{registration: @registration}) %>
-  <%= link "Cancel", class: "btn btn-primary", to: Routes.lookup_path(@conn, :lookup) %>
+<%= link "Paid", class: "button", to: Routes.lookup_path(@conn, :lookup, %{registration: @registration}) %>
+  <%= link "Cancel", class: "button", to: Routes.lookup_path(@conn, :lookup) %>
 
 <ul>
   <li>

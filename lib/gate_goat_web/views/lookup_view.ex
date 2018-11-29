@@ -8,4 +8,8 @@ defmodule GateGoatWeb.LookupView do
   def checks_payable(params) do
     GateGoatWeb.RegistrationView.checks_payable(params)
   end
+
+  def get_events() do
+    GateGoat.Events.list_current_events()
+  end
 end

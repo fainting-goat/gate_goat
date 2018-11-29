@@ -1,5 +1,5 @@
 <%= form_for @conn, Routes.login_path(@conn, :login), fn f -> %>
   <div>Username</div><div><%= text_input f, :username %></div>
   <div>Password</div><div><%= text_input f, :password %></div>
-  <div><%= submit "Login", class: "btn btn-primary" %></div>
+  <div><%= submit "Login", class: "button" %></div>
 <% end %>

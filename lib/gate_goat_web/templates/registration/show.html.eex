@@ -9,6 +9,8 @@
 <div>You will pay: $<%= payment(@registration) %></div>
 <div>Please make all checks out to: <%= checks_payable(@registration.event_id) %></div>
 
+<hr>
+
 <ul>
 
   <li>
