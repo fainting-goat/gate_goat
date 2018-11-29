@@ -9,6 +9,7 @@ defmodule GateGoat.Repo.Migrations.CreateEvents do
       add :feast_fee, :integer
       add :event_date, :date
       add :checks_payable, :string
+      add :feast_available, :boolean, default: true
 
       timestamps()
     end

@@ -11,6 +11,7 @@ defmodule GateGoat.Events.Event do
     field :event_name, :string
     field :feast_fee, :integer
     field :checks_payable, :string
+    field :feast_available, :boolean
     has_many :registration, Registration
 
     timestamps()
@@ -19,7 +20,7 @@ defmodule GateGoat.Events.Event do
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:event_name, :camping_fee, :event_fee, :feast_fee, :event_date, :checks_payable])
-    |> validate_required([:event_name, :camping_fee, :event_fee, :feast_fee, :event_date, :checks_payable])
+    |> cast(attrs, [:event_name, :camping_fee, :event_fee, :feast_fee, :event_date, :checks_payable, :feast_available])
+    |> validate_required([:event_name, :camping_fee, :event_fee, :feast_fee, :event_date, :checks_payable, :feast_available])
   end
 end

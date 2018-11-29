@@ -60,7 +60,7 @@
   </div>
 
   <div id="submitDiv" class="form-group">
-    <%= submit "Continue", class: "btn btn-primary", name: "continue_finish", value: "continue" %>
-    <%= submit "Done", class: "btn btn-primary", name: "continue_finish", value: "done" %>
+    <%= submit "Continue", class: "button", name: "continue_finish", value: "continue" %>
+    <%= submit "Done", class: "button", name: "continue_finish", value: "done" %>
   </div>
 <% end %>
