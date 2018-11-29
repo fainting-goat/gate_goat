@@ -1,7 +1,3 @@
-import Ecto
-import Ecto.Changeset
-import Ecto.Query
-
 alias GateGoat.Repo
 alias GateGoat.Events.Event
 
@@ -9,7 +5,7 @@ event_changeset1 = Event.changeset(
   %Event{},
   %{
     event_name: "Red Dragon",
-    event_date: ~D[2018-10-15],
+    event_date: ~D[2020-10-10],
     event_fee: 10,
     feast_fee: 10,
     camping_fee: 5,

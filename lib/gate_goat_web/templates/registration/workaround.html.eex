@@ -1,0 +1,4 @@
+<%= render "family_form.html", Map.put(assigns, :action, Routes.registration_path(@conn, :create, event_id: @event_id, f: @f, family: true)) %>
+<%= Plug.CSRFProtection.get_csrf_token_for("/register/create") %>
+<br>
+<%= Plug.CSRFProtection.get_csrf_token_for("/register/new") %>

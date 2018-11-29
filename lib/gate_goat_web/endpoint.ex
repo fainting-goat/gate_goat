@@ -1,7 +1,7 @@
 defmodule GateGoatWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :gate_goat
 
-  socket "/socket", GateGoatWeb.UserSocket
+  socket "/socket", GateGoatWeb.UserSocket, websocket: true
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -24,7 +24,7 @@ defmodule GateGoatWeb.Endpoint do
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Jason
 
   plug Plug.MethodOverride
   plug Plug.Head

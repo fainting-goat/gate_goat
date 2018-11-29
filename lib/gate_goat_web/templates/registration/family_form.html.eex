@@ -1,0 +1,66 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :registration_type, class: "control-label" %>
+    <%= select(f, :family, ["Family Registration": "true"]) %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :sca_name, class: "control-label" %>
+    <%= render_with_error :text_input, f, :sca_name %>
+    <%= error_tag f, :sca_name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :legal_name, class: "control-label" %>
+    <%= render_with_error :text_input, f, :legal_name %>
+    <%= error_tag f, :legal_name %>
+  </div>
+
+  <div><p>Are you a member? Yes <%= radio_button(f, :member_option, "true") %> No <%= radio_button(f, :member_option, "false") %></p></div>
+
+  <div class="form-group">
+    <%= label f, :membership_number, class: "control-label" %>
+    <%= render_with_error :text_input, f, :membership_number %>
+    <%= error_tag f, :membership_number %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :membership_expiration_date, class: "control-label" %>
+    <%= render_with_error :text_input, f, :membership_expiration_date %>
+    (yyyy-mm-dd)
+    <%= error_tag f, :membership_expiration_date %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :group_name, class: "control-label" %>
+    <%= render_with_error :text_input, f, :group_name %>
+    <%= error_tag f, :group_name %>
+  </div>
+
+  <%= if display_feast_option(@event_id) do %>
+    <div><p>Feast?  ($<%= get_feast_fee(@event_id) %>) Yes <%= radio_button(f, :feast_option, "true") %> No <%= radio_button(f, :feast_option, "false") %></p></div>
+  <% end %>
+
+  <%= if display_camping_option(@event_id) do %>
+    <div><p>Camping? ($<%= get_camping_fee(@event_id) %>) Yes <%= radio_button(f, :camping_option, "true") %> No <%= radio_button(f, :camping_option, "false") %></p></div>
+  <% end %>
+
+  <%= render "waiver.html" %>
+
+  <div class="form-group">
+    <%= checkbox f, :waiver %>
+    I have read and agree to the terms of the waiver.
+    <%= error_tag f, :waiver %>
+  </div>
+
+  <div id="submitDiv" class="form-group">
+    <%= submit "Continue", class: "btn btn-primary", name: "continue_finish", value: "continue" %>
+    <%= submit "Done", class: "btn btn-primary", name: "continue_finish", value: "done" %>
+  </div>
+<% end %>

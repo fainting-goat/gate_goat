@@ -22,13 +22,13 @@
       <td><%= event.camping_fee %></td>
 
       <td class="text-right">
-        <span><%= link "Show", to: event_path(@conn, :show, event), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: event_path(@conn, :edit, event), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <span><%= link "Show", to: Routes.event_path(@conn, :show, event), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: Routes.event_path(@conn, :edit, event), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: Routes.event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Event", to: event_path(@conn, :new) %></span>
+<span><%= link "New Event", to: Routes.event_path(@conn, :new) %></span>

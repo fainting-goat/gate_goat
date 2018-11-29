@@ -1,3 +1,5 @@
+@import "./phoenix.css";
+
 .form-errors-present {
     background-color: #f2dede !important;
     color: #a94442 !important;

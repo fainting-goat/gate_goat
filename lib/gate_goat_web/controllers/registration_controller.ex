@@ -8,7 +8,7 @@ defmodule GateGoatWeb.RegistrationController do
     registrations = Events.list_registrations(event_id)
     render(conn, "index.html", registrations: registrations, event_id: event_id)
   end
-  def index(conn, params) do
+  def index(conn, _params) do
     registrations = Events.list_registrations()
     render(conn, "index.html", registrations: registrations)
   end
@@ -27,7 +27,7 @@ defmodule GateGoatWeb.RegistrationController do
       {:ok, registration} ->
         conn
         |> put_flash(:info, "Registration created successfully.")
-        |> redirect(to: registration_path(conn, :show, registration, event_id: event_id))
+        |> redirect(to: Routes.registration_path(conn, :show, registration, event_id: event_id))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, event_id: event_id)
     end
@@ -51,7 +51,7 @@ defmodule GateGoatWeb.RegistrationController do
       {:ok, registration} ->
         conn
         |> put_flash(:info, "Registration updated successfully.")
-        |> redirect(to: registration_path(conn, :show, registration))
+        |> redirect(to: Routes.registration_path(conn, :show, registration))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", registration: registration, changeset: changeset)
     end
@@ -63,6 +63,6 @@ defmodule GateGoatWeb.RegistrationController do
 
     conn
     |> put_flash(:info, "Registration deleted successfully.")
-    |> redirect(to: registration_path(conn, :index))
+    |> redirect(to: Routes.registration_path(conn, :index))
   end
 end

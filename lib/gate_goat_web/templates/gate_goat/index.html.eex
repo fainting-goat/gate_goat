@@ -13,7 +13,7 @@
 <%= for event <- @events do %>
     <tr>
       <td class="text-right">
-        <span><%= link "Register", to: gate_goat_path(@conn, :register, event), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Register", to: Routes.gate_goat_path(@conn, :register, event), class: "btn btn-default btn-xs" %></span>
       </td>
       <td><%= event.event_name %></td>
       <td><%= event.event_date %></td>

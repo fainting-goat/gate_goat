@@ -27,5 +27,5 @@
   </tbody>
 </table>
 
-<span><%= link "New Registration", to: registration_path(@conn, :new, event_id: @event_id) %></span> |
-<span><%= link "Back", to: gate_goat_path(@conn, :index) %></span>
+<span><%= link "New Registration", to: Routes.registration_path(@conn, :new, event_id: @event_id) %></span> |
+<span><%= link "Back", to: Routes.gate_goat_path(@conn, :index) %></span>

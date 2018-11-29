@@ -2,8 +2,6 @@ defmodule GateGoatWeb.GateGoatController do
   use GateGoatWeb, :controller
 
   alias GateGoat.Events
-  alias GateGoat.Events.Event
-  alias GateGoat.Events.Registration
 
   def index(conn, _params) do
     events = Events.list_current_events()
@@ -11,6 +9,6 @@ defmodule GateGoatWeb.GateGoatController do
   end
 
   def register(conn, %{"id" => event_id}) do
-    redirect(conn, to: registration_path(conn, :new, event_id: event_id))
+    redirect(conn, to: Routes.registration_path(conn, :new, event_id: event_id))
   end
 end
