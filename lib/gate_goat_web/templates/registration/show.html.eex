@@ -1,4 +1,4 @@
-<h2>You are now registered.</h2>
+<h2>You are now registered for <%= GateGoat.Events.get_event!(@registration.event_id).event_name %>.</h2>
  <h2>Confirmation Number: <%= @registration.id %></h2>
 
 <div><b>Please stay on this screen.  You will need to show both your confirmation number and blue card.</b></div>
