@@ -14,4 +14,18 @@ event_changeset1 = Event.changeset(
   }
 )
 
+event_changeset2 = Event.changeset(
+  %Event{},
+  %{
+    event_name: "Demo Event",
+    event_date: ~D[2020-12-20],
+    event_fee: 10,
+    feast_fee: 8,
+    camping_fee: 5,
+    checks_payable: "Demo Event",
+    feast_available: true
+  }
+)
+
 Repo.insert!(event_changeset1)
+Repo.insert!(event_changeset2)
