@@ -8,6 +8,10 @@ defmodule GateGoatWeb.GateGoatController do
     render(conn, "index.html", events: events)
   end
 
+  def about(conn, _params) do
+    render(conn, "about.html")
+  end
+
   def register(conn, %{"id" => event_id}) do
     redirect(conn, to: Routes.registration_path(conn, :new, event_id: event_id))
   end
