@@ -1,28 +1,22 @@
 <h2>Events</h2>
 
 <table class="table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Event Name</th>
-      <th>Event Date</th>
-      <th>Event Fees</th>
-    </tr>
-  </thead>
   <tbody>
-<%= for event <- @events do %>
-    <tr>
-      <td class="text-right">
-        <span><%= link "Register", to: Routes.gate_goat_path(@conn, :register, event), class: "button" %></span>
-      </td>
-      <td><%= event.event_name %></td>
-      <td><%= event.event_date %></td>
-      <td>
-        <p>Registration: $<%= event.event_fee %></p>
-        <%= if event.feast_fee != 0 do %><p>Feast: $<%= event.feast_fee %></p><% end %>
-        <%= if event.camping_fee != 0 do %><p>Camping: $<%= event.camping_fee %></p><% end %>
-      </td>
-    </tr>
-<% end %>
+    <%= for event <- @events do %>
+      <tr>
+        <td class="text-right">
+          <span><%= link "Register", to: Routes.gate_goat_path(@conn, :register, event), class: "button" %></span>
+        </td>
+        <td>
+          <label><%= event.event_name %></label>
+          <%= event.event_date %>
+          <br>Registration: $<%= event.event_fee %>
+          <%= if event.feast_fee != 0 do %><br>Feast: $<%= event.feast_fee %><% end %>
+          <%= if event.camping_fee != 0 do %><br>Camping: $<%= event.camping_fee %><% end %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
+
+<span><%= link "About GateGoat", to: Routes.gate_goat_path(@conn, :about) %></span>

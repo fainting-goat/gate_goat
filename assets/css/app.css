@@ -21,3 +21,8 @@
 .waiver {
     height: 15rem !important;
 }
+
+.button {
+    padding: 1rem !important;
+    line-height: inherit;
+}
