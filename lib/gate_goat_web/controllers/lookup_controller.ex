@@ -12,6 +12,7 @@ defmodule GateGoatWeb.LookupController do
   def lookup(conn, %{"search" => %{"confirmation_number" => registration_id}}) do
     if Regex.match?(~r/^\d+$/, registration_id) do
       registration = Events.get_registration(registration_id)
+      |> GateGoat.Repo.preload(:event)
       render_results(conn, registration)
     else
       render_results(conn)

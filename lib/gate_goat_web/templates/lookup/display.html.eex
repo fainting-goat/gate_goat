@@ -1,9 +1,21 @@
 <h3><strong>Payment:</strong> $<%= payment(@registration) %></h3>
 
+<%= if @registration.verified do %>
+  <div><strong>This user is already verified.</strong></div>
+<% else %>
+  <div>This user is not yet verified.</div>
+<% end %>
+
+<hr>
+
 <%= link "Paid", class: "button", to: Routes.lookup_path(@conn, :lookup, %{registration: @registration}) %>
   <%= link "Cancel", class: "button", to: Routes.lookup_path(@conn, :lookup) %>
 
 <ul>
+  <li>
+    <strong>Event Name:</strong>
+    <%= @registration.event.event_name %>
+  </li>
   <li>
     <strong>Confirmation Number:</strong>
     <%= @registration.id %>
