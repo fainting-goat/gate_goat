@@ -13,16 +13,34 @@ defmodule GateGoatWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :protected do
+    plug :fetch_session
+    plug Guardian.Plug.Pipeline, module: GateGoat.Guardian,
+                                 error_handler: GateGoat.AuthErrorHandler
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+    plug GateGoat.CurrentUser
+  end
+
+  scope "/", GateGoatWeb do
+    pipe_through [:protected, :browser]
+
+    get "/lookup", LookupController, :lookup
+    post "/lookup", LookupController, :lookup
+  end
+
   scope "/", GateGoatWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", GateGoatController, :index
     get "/about", GateGoatController, :about
-    get "/lookup", LookupController, :lookup
-    post "/lookup", LookupController, :lookup
     get "/event/:id", GateGoatController, :register
     resources "/register", RegistrationController, only: [:index, :show, :create, :new]
 #    resources "/events", EventController
+
+    get "/login", LoginController, :login
+    post "/login", LoginController, :login
+    post "/logout", LoginController, :logout
   end
 
   # Other scopes may use custom stacks.

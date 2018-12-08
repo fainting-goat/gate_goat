@@ -37,3 +37,8 @@
     margin: auto;
     display: block;
 }
+
+.logout {
+    display: inline;
+    float: right;
+}

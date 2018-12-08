@@ -1,4 +1,4 @@
-#defmodule GateGoatWeb.LoginView do
-#  use GateGoatWeb, :view
-#
-#end
+defmodule GateGoatWeb.LoginView do
+  use GateGoatWeb, :view
+
+end

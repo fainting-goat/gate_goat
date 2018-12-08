@@ -1,1 +1,8 @@
+<div class="logout">
+  <%= form_for @conn, Routes.login_path(@conn, :login), [as: :logout], fn f -> %>
+      <%= submit "Logout", class: "button" %>
+  <% end %>
+</div>
+
+
 <%= render GateGoatWeb.LookupView, "form.html", conn: @conn, error: @error %>
