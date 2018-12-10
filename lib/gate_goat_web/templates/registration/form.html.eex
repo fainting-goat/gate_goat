@@ -33,7 +33,7 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :group_name, class: "control-label" %>
+    <%= label f, :home_group, class: "control-label" %>
     <%= render_with_error :text_input, f, :group_name %>
     <%= error_tag f, :group_name %>
   </div>
