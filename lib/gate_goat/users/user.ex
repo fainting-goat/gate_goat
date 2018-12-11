@@ -10,6 +10,7 @@ defmodule GateGoat.Users.User do
     field :username, :string
 
     has_one :role, Role
+    has_many :event, Event
 
     timestamps()
   end
