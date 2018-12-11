@@ -1,4 +1,4 @@
-<h2>New Registration</h2>
+<h2>New Registration for <%= GateGoat.Events.get_event!(@event_id).event_name %></h2>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.registration_path(@conn, :create, event_id: @event_id)) %>
 

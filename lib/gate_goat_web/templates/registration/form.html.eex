@@ -17,7 +17,7 @@
     <%= error_tag f, :legal_name %>
   </div>
 
-  <div><p>Are you a member? Yes <%= radio_button(f, :member_option, "true") %> No <%= radio_button(f, :member_option, "false") %></p></div>
+  <div style="display: none;"><p>Are you a member? Yes <%= radio_button(f, :member_option, "true") %> No <%= radio_button(f, :member_option, "false") %></p></div>
 
   <div class="form-group">
     <%= label f, :membership_number, class: "control-label" %>
@@ -33,7 +33,7 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :group_name, class: "control-label" %>
+    <%= label f, :home_group, class: "control-label" %>
     <%= render_with_error :text_input, f, :group_name %>
     <%= error_tag f, :group_name %>
   </div>
