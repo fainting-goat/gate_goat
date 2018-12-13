@@ -8,5 +8,9 @@ defmodule GateGoat.Repo.Migrations.CreateRoles do
       timestamps()
     end
 
+    alter table(:users) do
+      add :role_id, references(:roles)
+    end
+
   end
 end

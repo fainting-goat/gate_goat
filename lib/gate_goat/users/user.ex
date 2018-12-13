@@ -9,8 +9,8 @@ defmodule GateGoat.Users.User do
     field :password_hash, :string
     field :username, :string
 
-    has_one :role, Role
-    has_many :event, Event
+    belongs_to :role, Role
+    belongs_to :event, Event
 
     timestamps()
   end
