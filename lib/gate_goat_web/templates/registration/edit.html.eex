@@ -1,5 +1,5 @@
 <h2>Edit Registration</h2>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.registration_path(@conn, :update, @registration)) %>
+<%= render "edit_form.html", Map.put(assigns, :action, Routes.registration_path(@conn, :update, @registration)) %>
 
 <span><%= link "Back", to: Routes.registration_path(@conn, :index) %></span>

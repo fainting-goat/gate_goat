@@ -21,7 +21,7 @@ defmodule GateGoatWeb.LoginController do
       {:ok, conn} ->
         conn
         |> put_flash(:info, "You’re now logged in!")
-        |> redirect(to: "/lookup")
+        |> redirect(to: "/admin")
       {:error, conn} ->
         conn
         |> put_flash(:error, "Invalid email/password combination")

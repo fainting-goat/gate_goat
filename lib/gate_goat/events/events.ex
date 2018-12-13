@@ -23,6 +23,10 @@ defmodule GateGoat.Events do
     Repo.all(Registration)
   end
 
+  def list_registrations_events do
+    Repo.all(Registration) |> Repo.preload(:event)
+  end
+
   @doc """
   Gets a single registration.
 

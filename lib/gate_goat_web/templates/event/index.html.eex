@@ -31,4 +31,5 @@
   </tbody>
 </table>
 
+<span><%= link "Back", to: Routes.admin_path(@conn, :index) %></span> |
 <span><%= link "New Event", to: Routes.event_path(@conn, :new) %></span>

@@ -4,12 +4,12 @@ defmodule GateGoatWeb.RegistrationController do
   alias GateGoat.Events
   alias GateGoat.Events.Registration
 
-  def index(conn, %{"event_id" => event_id}) do
-    registrations = Events.list_registrations(event_id)
-    render(conn, "index.html", registrations: registrations, event_id: event_id)
-  end
+#  def index(conn, %{"event_id" => event_id}) do
+#    registrations = Events.list_registrations(event_id)
+#    render(conn, "index.html", registrations: registrations, event_id: event_id)
+#  end
   def index(conn, _params) do
-    registrations = Events.list_registrations()
+    registrations = Events.list_registrations_events()
     render(conn, "index.html", registrations: registrations)
   end
 
