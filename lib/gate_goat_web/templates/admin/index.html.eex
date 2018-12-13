@@ -1,3 +1,9 @@
+<div class="logout">
+  <%= form_for @conn, Routes.login_path(@conn, :login), [as: :logout], fn f -> %>
+      <%= submit "Logout", class: "button" %>
+  <% end %>
+</div>
+
 <div><span><%= link "Verify Registrations", to: Routes.lookup_path(@conn, :lookup) %></span></div>
 <div><span><%= link "Manage Events", to: Routes.event_path(@conn, :index) %></span></div>
 <div><span><%= link "Manage Registrations", to: Routes.registration_path(@conn, :index) %></span></div>
