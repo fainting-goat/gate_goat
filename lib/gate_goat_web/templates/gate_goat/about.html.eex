@@ -13,18 +13,21 @@
 
 <div><h3>The GateGoat Team</h3></div>
 
-  <div class="about-container">
+<div>
+  <div>
     <div class="about-picture"><img src="<%= Routes.static_path(@conn, "/images/brighid.png") %>"/></div>
     <div class="about-text">
-      Lady Brighid of Red Spears is professionally a developer that believes in solving problems through the power of
+      <p>Lady Brighid of Red Spears is professionally a developer that believes in solving problems through the power of
       technology.  She aspires to create useful and intuitive software.  She thinks goats are awesome.
       Also, standing in long lines makes her anxious.
     </div>
   </div>
-  <div class="about-container">
+  <br><br>
+  <div>
     <div class="about-picture"><img src="<%= Routes.static_path(@conn, "/images/nikolai.png") %>"/></div>
     <div class="about-text">
-      Count Nikolai does not enjoy standing in lines. He has worked in the marketing and advertising industry for more
+      <p>Count Nikolai does not enjoy standing in lines. He has worked in the marketing and advertising industry for more
       than 20 years and hopes that some of that experience will help people learn about GateGoat so that he'll have to wait
       in line as little as possible.
     </div>
+</div>
