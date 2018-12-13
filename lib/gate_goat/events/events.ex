@@ -53,6 +53,8 @@ defmodule GateGoat.Events do
 
   """
   def create_registration(attrs \\ %{}, event_id) do
+    attrs = Map.put(attrs, "membership_expiration_date", human_to_elixir_date(attrs["membership_expiration_date"]))
+
     %Registration{}
     |> Repo.preload(:event)
     |> Registration.changeset(attrs)
@@ -208,5 +210,35 @@ defmodule GateGoat.Events do
   """
   def change_event(%Event{} = event) do
     Event.changeset(event, %{})
+  end
+
+  def human_to_elixir_date(date) do
+    if date =~ "/" do
+      [month, day, year] = String.split(date, "/")
+
+      day = if String.length(day) == 1 do
+        "0#{day}"
+      end
+
+      "#{year}-#{month}-#{day}"
+    else
+      date
+    end
+  end
+
+  def elixir_to_human_date(date) do
+    date = Date.to_string(date)
+
+    if String.match?(date, ~r/\d\d\d\d\-\d\d\-\d\d/) do
+      [year, month, day] = String.split(date, "-")
+
+      if String.length(day) == 1 do
+        day = "0#{day}"
+      end
+
+      "#{month}/#{day}/#{year}"
+    else
+      date
+    end
   end
 end

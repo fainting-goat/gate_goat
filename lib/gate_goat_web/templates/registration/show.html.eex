@@ -14,24 +14,24 @@
 <ul>
 
   <li>
-    <strong>Sca name:</strong>
+    <strong>SCA Name:</strong>
     <%= @registration.sca_name %>
   </li>
 
   <li>
-    <strong>Legal name:</strong>
+    <strong>Legal Name:</strong>
     <%= @registration.legal_name %>
   </li>
 
   <%= if @registration.member_option == true do %>
     <li>
-      <strong>Membership number:</strong>
+      <strong>Membership Number:</strong>
       <%= @registration.membership_number %>
     </li>
 
     <li>
-      <strong>Membership expiration date:</strong>
-      <%= @registration.membership_expiration_date %>
+      <strong>Membership Expiration Date:</strong>
+      <%= GateGoat.Events.elixir_to_human_date(@registration.membership_expiration_date) %>
     </li>
   <% else %>
     <li>
@@ -40,7 +40,7 @@
   <% end %>
 
   <li>
-    <strong>Group name:</strong>
+    <strong>Home Group:</strong>
     <%= @registration.group_name %>
   </li>
 
