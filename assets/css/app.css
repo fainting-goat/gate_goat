@@ -50,6 +50,11 @@
     display: flex;
 }
 
+.logout {
+    display: inline;
+    float: right;
+}
+
 @media only screen and (max-width: 768px) {
     .about-picture {
         padding: 1rem !important;
