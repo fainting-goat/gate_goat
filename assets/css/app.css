@@ -29,6 +29,9 @@
 
 .about-picture {
     padding: 1rem !important;
+    width: 20%;
+    display: inline-block;
+    float: left;
 }
 
 .about-picture img {
@@ -36,4 +39,26 @@
     max-height: 100%;
     margin: auto;
     display: block;
+}
+
+.about-text {
+    width: 80%;
+}
+
+.margin-container {
+    margin-bottom: 2.5rem;
+    display: flex;
+}
+
+.logout {
+    display: inline;
+    float: right;
+}
+
+@media only screen and (max-width: 768px) {
+    .about-picture {
+        padding: 1rem !important;
+        width: 60%;
+        float: none;
+    }
 }

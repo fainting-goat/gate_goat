@@ -44,7 +44,10 @@ defmodule GateGoat.Mixfile do
       {:distillery, "~> 1.5", runtime: false},
       {:ecto_sql, "~> 3.0"},
       {:phoenix_ecto, "~> 4.0"},
-      {:jason, "~> 1.0"}
+      {:jason, "~> 1.0"},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"},
+      {:guardian, "~> 1.0"}
     ]
   end
 

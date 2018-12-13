@@ -1,0 +1,33 @@
+<h2>About GateGoat</h2>
+
+<div>
+   <p>GateGoat was designed as a way to help expedite the registration process at events for the Society of Creative
+   Anachronism.  It is meant to supplement the paper registration process by allowing people to fill out the registration
+   form on their smart phones.  Currently, Gate Goat only supports individual member registrations while it is in the trial stage.</p>
+
+     <p>Gate Goat is written in Elixir, using the Phoenix framework.  Need to report an issue with Gate Goat?
+     Use the SCA grapevine!  A formal feedback system will be developed soon.</p>
+
+     <p><a href="/">Give it a try!</a></p>
+</div>
+
+<div><h3>The GateGoat Team</h3></div>
+
+<div>
+  <div>
+    <div class="about-picture"><img src="<%= Routes.static_path(@conn, "/images/brighid.png") %>"/></div>
+    <div class="about-text">
+      <p>Lady Brighid of Red Spears is professionally a developer that believes in solving problems through the power of
+      technology.  She aspires to create useful and intuitive software.  She thinks goats are awesome.
+      Also, standing in long lines makes her anxious.
+    </div>
+  </div>
+  <br><br>
+  <div>
+    <div class="about-picture"><img src="<%= Routes.static_path(@conn, "/images/nikolai.png") %>"/></div>
+    <div class="about-text">
+      <p>Count Nikolai does not enjoy standing in lines. He has worked in the marketing and advertising industry for more
+      than 20 years and hopes that some of that experience will help people learn about GateGoat so that he'll have to wait
+      in line as little as possible.
+    </div>
+</div>

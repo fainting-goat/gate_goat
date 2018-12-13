@@ -14,4 +14,6 @@ do
     && break
 done
 
+rm -rf ./deps
+
 docker-compose run --rm app bash -c "mix do deps.get, deps.compile, ecto.create, ecto.migrate, run priv/repo/seeds.exs"

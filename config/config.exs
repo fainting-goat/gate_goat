@@ -24,6 +24,11 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
+config :gate_goat, GateGoat.Guardian,
+       issuer: "gate_goat",
+       ttl: {30, :days},
+       secret_key: "JythYNxlLtsK5iehy+pwvJKPqNKVt8W+SWUmBN9hAAk7Fu1AHUi+3RBIzjIsqKmY"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
