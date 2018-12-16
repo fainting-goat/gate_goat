@@ -15,7 +15,10 @@ defmodule GateGoatWeb.RegistrationView do
   end
 
   def payment(%GateGoat.Events.Registration{feast_option: feast_option, camping_option: camping_option, event_id: event_id, member_option: member_option}) do
-    get_event_fee(event_id) + get_feast_fee(event_id, feast_option) + get_camping_fee(event_id, camping_option) + get_non_member_surcharge(member_option)
+    get_event_fee(event_id)
+    |> Decimal.add(get_feast_fee(event_id, feast_option))
+    |> Decimal.add(get_camping_fee(event_id, camping_option))
+    |> Decimal.add(get_non_member_surcharge(member_option))
   end
 
   def event_name(event_id) do
