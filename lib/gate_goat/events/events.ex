@@ -164,8 +164,11 @@ defmodule GateGoat.Events do
 
   """
   def create_event(attrs \\ %{}) do
+    attrs = Map.put(attrs, "event_date", human_to_elixir_date(attrs["event_date"]))
+
     %Event{}
     |> Event.changeset(attrs)
+    |> IO.inspect
     |> Repo.insert()
   end
 
@@ -182,6 +185,8 @@ defmodule GateGoat.Events do
 
   """
   def update_event(%Event{} = event, attrs) do
+    attrs = Map.put(attrs, "event_date", human_to_elixir_date(attrs["event_date"]))
+
     event
     |> Event.changeset(attrs)
     |> Repo.update()
@@ -222,6 +227,8 @@ defmodule GateGoat.Events do
 
       day = if String.length(day) == 1 do
         "0#{day}"
+      else
+        day
       end
 
       "#{year}-#{month}-#{day}"
@@ -236,8 +243,10 @@ defmodule GateGoat.Events do
     if String.match?(date, ~r/\d\d\d\d\-\d\d\-\d\d/) do
       [year, month, day] = String.split(date, "-")
 
-      if String.length(day) == 1 do
-        day = "0#{day}"
+      day = if String.length(day) == 1 do
+        "0#{day}"
+      else
+        day
       end
 
       "#{month}/#{day}/#{year}"

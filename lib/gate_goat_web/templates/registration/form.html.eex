@@ -28,7 +28,7 @@
   <div class="form-group">
     <%= label f, :membership_expiration_date, class: "control-label" %>
     <%= render_with_error :text_input, f, :membership_expiration_date %>
-    (yyyy-mm-dd)
+    (mm/dd/yyyy)
     <%= error_tag f, :membership_expiration_date %>
   </div>
 
