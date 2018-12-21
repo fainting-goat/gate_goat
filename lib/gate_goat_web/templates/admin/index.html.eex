@@ -5,6 +5,11 @@
 </div>
 
 <div><span><%= link "Verify Registrations", to: Routes.lookup_path(@conn, :lookup) %></span></div>
-<div><span><%= link "Manage Events", to: Routes.event_path(@conn, :index) %></span></div>
-<div><span><%= link "Manage Registrations", to: Routes.registration_path(@conn, :index) %></span></div>
-<div><span><%= link "Manage Users", to: Routes.user_path(@conn, :index) %></span></div>
+
+<%= if GateGoat.AdminHelper.admin?(@conn) do %>
+  <div><span><%= link "Manage Events", to: Routes.event_path(@conn, :index) %></span></div>
+  <div><span><%= link "Manage Registrations", to: Routes.registration_path(@conn, :index) %></span></div>
+  <div><span><%= link "Manage Users", to: Routes.user_path(@conn, :index) %></span></div>
+<% else %>
+  <div><span><%= link "Update User Password", to: Routes.user_path(@conn, :edit, GateGoat.AdminHelper.user_id(@conn)) %></span></div>
+<% end %>

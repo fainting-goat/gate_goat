@@ -41,8 +41,8 @@ defmodule GateGoat.Events do
       ** (Ecto.NoResultsError)
 
   """
-  def get_registration!(id), do: Repo.get!(Registration, id)
-  def get_registration(id), do: Repo.get(Registration, id)
+  def get_registration!(id), do: Repo.get!(Registration, id) |> Repo.preload(:event)
+  def get_registration(id), do: Repo.get(Registration, id) |> Repo.preload(:event)
 
   @doc """
   Creates a registration.

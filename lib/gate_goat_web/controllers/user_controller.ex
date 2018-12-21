@@ -32,12 +32,16 @@ defmodule GateGoatWeb.UserController do
   end
 
   def edit(conn, %{"id" => id}) do
+    redirect_unless_valid(conn, id)
+
     user = Users.get_user!(id)
     changeset = Users.change_user(user)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
+    redirect_unless_valid(conn, id)
+
     user = Users.get_user!(id)
 
     case Users.update_user(user, user_params) do
@@ -58,5 +62,23 @@ defmodule GateGoatWeb.UserController do
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: Routes.user_path(conn, :index))
+  end
+
+  defp redirect_unless_valid(conn, id) do
+    unless verify_valid_user(conn, id) do
+      conn
+      |> redirect(to: Routes.login_path(conn, :login))
+    end
+  end
+
+  defp verify_valid_user(conn, id) do
+    %{id: user_id} = conn.assigns[:current_user]
+    current_user = Users.get_user!(user_id)
+
+    if current_user.role.type == "admin" do
+      true
+    else
+      current_user.id == String.to_integer(id)
+    end
   end
 end

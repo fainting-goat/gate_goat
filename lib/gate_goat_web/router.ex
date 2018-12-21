@@ -29,15 +29,18 @@ defmodule GateGoatWeb.Router do
   scope "/", GateGoatWeb do
     pipe_through [:protected, :admin, :browser]
 
-    get "/admin", AdminController, :index
     resources "/events", EventController
-    resources "/users", UserController
-    resources "/register", RegistrationController, only: [:index, :edit, :delete, :update]
+    resources "/users", UserController, only: [:index, :delete, :show, :create, :new]
+    resources "/register", RegistrationController, only: [:index, :delete]
   end
 
   scope "/", GateGoatWeb do
     pipe_through [:protected, :browser]
 
+    resources "/register", RegistrationController, only: [:edit, :update]
+    resources "/users", UserController, only: [:edit, :update]
+
+    get "/admin", AdminController, :index
     get "/lookup", LookupController, :lookup
     post "/lookup", LookupController, :lookup
   end

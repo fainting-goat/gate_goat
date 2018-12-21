@@ -67,3 +67,5 @@
   </li>
 </ul>
 
+<%= link "Edit Registration", to: Routes.registration_path(@conn, :edit, @registration) %>
+

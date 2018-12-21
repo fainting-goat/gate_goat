@@ -4,6 +4,7 @@ defmodule GateGoat.Users do
   alias GateGoat.Repo
   alias GateGoat.Users.User
   alias GateGoat.Users.Role
+  alias GateGoat.Events.Event
 
   @doc """
   Returns the list of users.
@@ -15,7 +16,9 @@ defmodule GateGoat.Users do
 
   """
   def list_users do
-    Repo.all(User) |> GateGoat.Repo.preload(:role)
+    Repo.all(User)
+    |> GateGoat.Repo.preload(:role)
+    |> GateGoat.Repo.preload(:event)
   end
 
   @doc """
@@ -32,7 +35,11 @@ defmodule GateGoat.Users do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id) |> GateGoat.Repo.preload(:role)
+  def get_user!(id) do
+    Repo.get!(User, id)
+    |> GateGoat.Repo.preload(:role)
+    |> GateGoat.Repo.preload(:event)
+  end
 
   def get_user_by_username!(username), do: Repo.get_by!(User, username: username)
   def get_user_by_username(username), do: Repo.get_by(User, username: username)

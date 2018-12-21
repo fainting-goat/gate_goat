@@ -5,6 +5,7 @@
     <tr>
       <th>Username</th>
       <th>Type of User</th>
+      <th>Assigned to Event</th>
       <th></th>
     </tr>
   </thead>
@@ -13,6 +14,7 @@
     <tr>
     <td><%= user.username %></td>
     <td><%= user.role.type %></td>
+    <td><%= sanitize_event(user.event) %></td>
 
       <td>
         <%= link "Show", to: Routes.user_path(@conn, :show, user) %>
