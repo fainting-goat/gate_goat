@@ -13,10 +13,10 @@
   <hr>
 
 <%= form_for @conn, Routes.lookup_path(@conn, :lookup), [as: :feast], fn f -> %>
-  Disable Feast Option
+  Disable Feast Option - feast is currently <%= feast_available(GateGoat.AdminHelper.current_user(@conn).event) %>
   <div class="form-group">
     <label>
-      Event: <%= select f, :event, Enum.map(get_events(), &{&1.event_name, &1.id}) %>
+      Event: <%= select f, :event, Enum.map([GateGoat.AdminHelper.current_user(@conn).event], &{&1.event_name, &1.id}) %>
     </label>
     <%= submit "Disable", class: "button", name: "action", value: "disable" %>
     <%= submit "Enable", class: "button", name: "action", value: "enable" %>

@@ -168,7 +168,6 @@ defmodule GateGoat.Events do
 
     %Event{}
     |> Event.changeset(attrs)
-    |> IO.inspect
     |> Repo.insert()
   end
 
@@ -184,9 +183,13 @@ defmodule GateGoat.Events do
       {:error, %Ecto.Changeset{}}
 
   """
+  def update_event(%Event{} = event, %{"event_date" => event_date} = attrs) do
+    attrs = Map.put(attrs, "event_date", human_to_elixir_date(event_date))
+    event
+    |> Event.changeset(attrs)
+    |> Repo.update()
+  end
   def update_event(%Event{} = event, attrs) do
-    attrs = Map.put(attrs, "event_date", human_to_elixir_date(attrs["event_date"]))
-
     event
     |> Event.changeset(attrs)
     |> Repo.update()
