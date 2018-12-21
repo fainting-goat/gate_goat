@@ -10,12 +10,19 @@ defmodule GateGoatWeb.LookupController do
     render_feast_change(conn, event_id, true, "enabled")
   end
   def lookup(conn, %{"search" => %{"confirmation_number" => registration_id}}) do
-    if Regex.match?(~r/^\d+$/, registration_id) do
-      registration = Events.get_registration(registration_id)
-      |> GateGoat.Repo.preload(:event)
-      render_results(conn, registration)
-    else
-      render_results(conn)
+    registration = Events.get_registration(registration_id)
+
+    cond do
+      !Regex.match?(~r/^\d+$/, registration_id) || registration == nil ->
+        conn
+        |> put_flash(:error, "Please enter a valid confirmation number.")
+        |> render_results()
+      !verify_user_event(conn, registration) ->
+        conn
+        |> put_flash(:error, "This user registered for the wrong event.  Please have them re-register.")
+        |> render_results()
+      true ->
+        render_results(conn, registration)
     end
   end
   def lookup(conn, %{"registration" => registration_id}) do
@@ -41,5 +48,15 @@ defmodule GateGoatWeb.LookupController do
     conn
     |> put_flash(:info, "Feast #{message} for #{event.event_name}.")
     |> render("lookup.html", verified: true, error: false)
+  end
+
+  defp verify_user_event(conn, registration) do
+    user = GateGoat.AdminHelper.current_user(conn)
+
+    if user.event == nil || registration == nil do
+      false
+    else
+      registration.event.id == user.event.id
+    end
   end
 end
