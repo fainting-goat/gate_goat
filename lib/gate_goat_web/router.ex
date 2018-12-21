@@ -22,12 +22,21 @@ defmodule GateGoatWeb.Router do
     plug GateGoat.CurrentUser
   end
 
+  pipeline :admin do
+    plug GateGoat.AdminUser
+  end
+
   scope "/", GateGoatWeb do
-    pipe_through [:protected, :browser]
+    pipe_through [:protected, :admin, :browser]
 
     get "/admin", AdminController, :index
     resources "/events", EventController
+    resources "/users", UserController
     resources "/register", RegistrationController, only: [:index, :edit, :delete, :update]
+  end
+
+  scope "/", GateGoatWeb do
+    pipe_through [:protected, :browser]
 
     get "/lookup", LookupController, :lookup
     post "/lookup", LookupController, :lookup

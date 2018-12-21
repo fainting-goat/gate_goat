@@ -7,6 +7,7 @@ defmodule GateGoatWeb.LoginController do
 
   def login(conn, %{"username" => username, "password" => password}) do
     user = Users.get_user_by_username(username)
+    |> Repo.preload(:role)
 
     result = cond do
       user && checkpw(password, user.password_hash) ->
@@ -21,7 +22,7 @@ defmodule GateGoatWeb.LoginController do
       {:ok, conn} ->
         conn
         |> put_flash(:info, "You’re now logged in!")
-        |> redirect(to: "/admin")
+        |> redirect(to: select_route(user))
       {:error, conn} ->
         conn
         |> put_flash(:error, "Invalid email/password combination")
@@ -41,5 +42,12 @@ defmodule GateGoatWeb.LoginController do
   defp login_user(conn, user) do
     conn
     |> GateGoat.Guardian.Plug.sign_in(user)
+  end
+
+  defp select_route(user) do
+    case user.role.type do
+      "admin" -> "/admin"
+      _ -> "/lookup"
+    end
   end
 end
