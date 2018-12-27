@@ -41,7 +41,7 @@
   <%= if display_feast_option(@event_id) do %>
     <div>
       Feast?  ($<%= get_feast_fee(@event_id) %>) Yes <%= radio_button(f, :feast_option, "true") %> No <%= radio_button(f, :feast_option, "false") %>
-      <h6>Selecting the feast option does not guarantee a feast spot.  Availability will be determined at the time of payment.</h6>
+      <h6>Note: GateGoat only calculates cost, it does  not guarantee a seat at feast.</h6>
     </div>
   <% end %>
 
