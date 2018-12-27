@@ -26,11 +26,11 @@ defmodule GateGoatWeb.RegistrationView do
   end
 
   def display_feast_option(event_id) do
-    GateGoat.Events.get_event!(event_id).feast_fee != 0 && GateGoat.Events.get_event!(event_id).feast_available
+    GateGoat.Events.get_event!(event_id).feast_fee != Decimal.new(0) && GateGoat.Events.get_event!(event_id).feast_available
   end
 
   def display_camping_option(event_id) do
-    GateGoat.Events.get_event!(event_id).camping_fee != 0
+    GateGoat.Events.get_event!(event_id).camping_fee != Decimal.new(0)
   end
 
   def checks_payable(event_id) do
