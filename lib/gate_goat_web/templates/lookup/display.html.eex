@@ -6,6 +6,11 @@
   <div>This user is not yet verified.</div>
 <% end %>
 
+<%= if feast_change(@registration.feast_option, @registration.event.feast_available) do %>
+  <div><strong>This user has selected feast but feast is no longer available.  Please change the user's registration
+  details so that feast is not selected and inform the user of the new amount due.</strong></div>
+<% end %>
+
 <hr>
 
 <%= link "Paid", class: "button", to: Routes.lookup_path(@conn, :lookup, %{registration: @registration}) %>

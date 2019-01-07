@@ -20,4 +20,7 @@ defmodule GateGoatWeb.LookupView do
       "disabled"
     end
   end
+
+  def feast_change(true, false), do: true
+  def feast_change(_, _), do: false
 end
