@@ -24,7 +24,7 @@ defmodule GateGoat.Events do
   end
 
   def list_registrations_events do
-    Repo.all(Registration) |> Repo.preload(:event)
+    Repo.all(from r in Registration, order_by: r.id) |> Repo.preload(:event)
   end
 
   @doc """

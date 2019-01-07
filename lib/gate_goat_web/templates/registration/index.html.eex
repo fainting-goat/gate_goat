@@ -12,6 +12,8 @@
       <th>Feast Option</th>
       <th>Camping Option</th>
       <th>Waiver</th>
+      <th>Updated</th>
+      <th>Created</th>
 
       <th></th>
     </tr>
@@ -36,6 +38,8 @@
         <td>N/A</td>
       <% end %>
       <td><%= registration.waiver %></td>
+      <td><%= registration.updated_at %></td>
+      <td><%= registration.inserted_at %></td>
 
       <td class="text-right">
         <span><%= link "Delete", to: Routes.registration_path(@conn, :delete, registration), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
