@@ -6,12 +6,12 @@ alias GateGoat.Users.Role
 event_changeset1 = Event.changeset(
   %Event{},
   %{
-    event_name: "Yule Feast",
-    event_date: ~D[2018-12-08],
+    event_name: "Test Event",
+    event_date: ~D[2022-12-08],
     event_fee: 10,
     feast_fee: 10,
     camping_fee: 0,
-    checks_payable: "SCA - Barony of Red Spears",
+    checks_payable: "Test Event",
     feast_available: true
   }
 )
@@ -32,30 +32,46 @@ event_changeset2 = Event.changeset(
 Repo.insert!(event_changeset1)
 Repo.insert!(event_changeset2)
 
-admin_changest = Role.changeset(
+admin_role_changest = Role.changeset(
   %Role{},
   %{
     type: "admin"
   }
 )
 
-user_changeset = Role.changeset(
+user_role_changeset = Role.changeset(
   %Role{},
   %{
     type: "user"
   }
 )
 
-admin = Repo.insert!(admin_changest)
-Repo.insert!(user_changeset)
+admin_role = Repo.insert!(admin_role_changest)
+user_role = Repo.insert!(user_role_changeset)
 
-
-kelsey_changeset = User.changeset(
+admin_changeset = User.changeset(
   %User{},
   %{
-    username: "kelsey",
-    password: "password!"
+    username: "admin",
+    password: "adminadmin"
   }
 )
 
-Repo.insert!(kelsey_changeset)
+user_changeset = User.changeset(
+  %User{},
+  %{
+    username: "user",
+    password: "useruser"
+  }
+)
+
+admin = Repo.insert!(admin_changeset) |> Repo.preload(:role)
+user = Repo.insert!(user_changeset) |> Repo.preload(:role)
+
+admin_change = Ecto.Changeset.change(admin)
+admin_change = Ecto.Changeset.put_assoc(admin_change, :role, admin_role)
+Repo.update!(admin_change)
+
+user_change = Ecto.Changeset.change(user)
+user_change = Ecto.Changeset.put_assoc(user_change, :role, user_role)
+Repo.update!(user_change)

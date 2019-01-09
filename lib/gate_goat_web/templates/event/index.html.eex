@@ -8,6 +8,7 @@
       <th>Event Fee</th>
       <th>Feast Fee</th>
       <th>Camping Fee</th>
+      <th>Checks Payable</th>
 
       <th></th>
     </tr>
@@ -20,6 +21,7 @@
       <td><%= event.event_fee %></td>
       <td><%= event.feast_fee %></td>
       <td><%= event.camping_fee %></td>
+      <td><%= event.checks_payable %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: Routes.event_path(@conn, :show, event), class: "btn btn-default btn-xs" %></span>
@@ -31,4 +33,5 @@
   </tbody>
 </table>
 
+<span><%= link "Back", to: Routes.admin_path(@conn, :index) %></span> |
 <span><%= link "New Event", to: Routes.event_path(@conn, :new) %></span>

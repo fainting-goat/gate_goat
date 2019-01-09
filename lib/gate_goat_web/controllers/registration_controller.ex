@@ -4,12 +4,8 @@ defmodule GateGoatWeb.RegistrationController do
   alias GateGoat.Events
   alias GateGoat.Events.Registration
 
-  def index(conn, %{"event_id" => event_id}) do
-    registrations = Events.list_registrations(event_id)
-    render(conn, "index.html", registrations: registrations, event_id: event_id)
-  end
   def index(conn, _params) do
-    registrations = Events.list_registrations()
+    registrations = Events.list_registrations_events()
     render(conn, "index.html", registrations: registrations)
   end
 
@@ -51,7 +47,7 @@ defmodule GateGoatWeb.RegistrationController do
       {:ok, registration} ->
         conn
         |> put_flash(:info, "Registration updated successfully.")
-        |> redirect(to: Routes.registration_path(conn, :show, registration))
+        |> redirect(to: Routes.lookup_path(conn, :lookup, %{"search" => %{"confirmation_number" => registration.id}}))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", registration: registration, changeset: changeset)
     end

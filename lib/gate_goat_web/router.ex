@@ -22,9 +22,25 @@ defmodule GateGoatWeb.Router do
     plug GateGoat.CurrentUser
   end
 
+  pipeline :admin do
+    plug GateGoat.AdminUser
+  end
+
+  scope "/", GateGoatWeb do
+    pipe_through [:protected, :admin, :browser]
+
+    resources "/events", EventController
+    resources "/users", UserController, only: [:index, :delete, :show, :create, :new]
+    resources "/register", RegistrationController, only: [:index, :delete]
+  end
+
   scope "/", GateGoatWeb do
     pipe_through [:protected, :browser]
 
+    resources "/register", RegistrationController, only: [:edit, :update]
+    resources "/users", UserController, only: [:edit, :update]
+
+    get "/admin", AdminController, :index
     get "/lookup", LookupController, :lookup
     post "/lookup", LookupController, :lookup
   end
@@ -35,8 +51,7 @@ defmodule GateGoatWeb.Router do
     get "/", GateGoatController, :index
     get "/about", GateGoatController, :about
     get "/event/:id", GateGoatController, :register
-    resources "/register", RegistrationController, only: [:index, :show, :create, :new]
-#    resources "/events", EventController
+    resources "/register", RegistrationController, only: [:show, :create, :new]
 
     get "/login", LoginController, :login
     post "/login", LoginController, :login

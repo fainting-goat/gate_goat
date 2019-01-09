@@ -1,0 +1,21 @@
+<h1>Show User</h1>
+
+<ul>
+  <li>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </li>
+
+    <li>
+      <strong>Type:</strong>
+      <%= @user.role.type %>
+    </li>
+
+    <li>
+      <strong>Event:</strong>
+      <%= sanitize_event(@user.event) %>
+    </li>
+</ul>
+
+<span><%= link "Edit", to: Routes.user_path(@conn, :edit, @user) %></span>
+<span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>

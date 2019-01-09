@@ -3,6 +3,7 @@ defmodule GateGoat.Users.User do
   import Ecto.Changeset
 
   alias GateGoat.Users.Role
+  alias GateGoat.Events.Event
 
   schema "users" do
     field :password, :string
@@ -17,10 +18,17 @@ defmodule GateGoat.Users.User do
 
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, [:username, :password])
+    |> cast(params, [:username, :password, :role_id, :event_id])
     |> validate_length(:username, min: 1, max: 20)
     |> validate_length(:password, min: 8, max: 100)
     |> make_password_hash
+  end
+
+  def empty_changeset(model, params \\ %{}) do
+    model
+    |> cast(params, [:username, :password, :role_id, :event_id])
+    |> validate_length(:username, min: 1, max: 20)
+    |> validate_length(:password, min: 8, max: 100)
   end
 
   def make_password_hash(changeset) do
@@ -32,6 +40,7 @@ defmodule GateGoat.Users.User do
         }
       } ->
         put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(password))
+      _ -> changeset
     end
   end
 end

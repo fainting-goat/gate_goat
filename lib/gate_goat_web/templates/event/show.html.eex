@@ -26,8 +26,13 @@
   <strong>Camping Fee:</strong>
   <%= @event.camping_fee %>
   </li>
+
+    <li>
+    <strong>Checks Payable:</strong>
+    <%= @event.checks_payable %>
+    </li>
 </ul>
 
 <span><%= link "Edit", to: Routes.event_path(@conn, :edit, @event) %></span>
-<span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>
+| <span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>
 

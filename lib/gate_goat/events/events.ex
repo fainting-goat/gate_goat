@@ -23,6 +23,10 @@ defmodule GateGoat.Events do
     Repo.all(Registration)
   end
 
+  def list_registrations_events do
+    Repo.all(from r in Registration, order_by: r.id) |> Repo.preload(:event)
+  end
+
   @doc """
   Gets a single registration.
 
@@ -37,8 +41,8 @@ defmodule GateGoat.Events do
       ** (Ecto.NoResultsError)
 
   """
-  def get_registration!(id), do: Repo.get!(Registration, id)
-  def get_registration(id), do: Repo.get(Registration, id)
+  def get_registration!(id), do: Repo.get!(Registration, id) |> Repo.preload(:event)
+  def get_registration(id), do: Repo.get(Registration, id) |> Repo.preload(:event)
 
   @doc """
   Creates a registration.
@@ -160,6 +164,8 @@ defmodule GateGoat.Events do
 
   """
   def create_event(attrs \\ %{}) do
+    attrs = Map.put(attrs, "event_date", human_to_elixir_date(attrs["event_date"]))
+
     %Event{}
     |> Event.changeset(attrs)
     |> Repo.insert()
@@ -177,6 +183,12 @@ defmodule GateGoat.Events do
       {:error, %Ecto.Changeset{}}
 
   """
+  def update_event(%Event{} = event, %{"event_date" => event_date} = attrs) do
+    attrs = Map.put(attrs, "event_date", human_to_elixir_date(event_date))
+    event
+    |> Event.changeset(attrs)
+    |> Repo.update()
+  end
   def update_event(%Event{} = event, attrs) do
     event
     |> Event.changeset(attrs)
@@ -218,6 +230,8 @@ defmodule GateGoat.Events do
 
       day = if String.length(day) == 1 do
         "0#{day}"
+      else
+        day
       end
 
       "#{year}-#{month}-#{day}"
@@ -232,8 +246,10 @@ defmodule GateGoat.Events do
     if String.match?(date, ~r/\d\d\d\d\-\d\d\-\d\d/) do
       [year, month, day] = String.split(date, "-")
 
-      if String.length(day) == 1 do
-        day = "0#{day}"
+      day = if String.length(day) == 1 do
+        "0#{day}"
+      else
+        day
       end
 
       "#{month}/#{day}/#{year}"

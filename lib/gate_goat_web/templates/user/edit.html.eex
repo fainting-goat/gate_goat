@@ -1,0 +1,9 @@
+<h1>Edit User</h1>
+
+<%= render "form_edit.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
+
+<%= if GateGoat.AdminHelper.admin?(@conn) do %>
+  <span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>
+<% else %>
+  <span><%= link "Back", to: Routes.admin_path(@conn, :index) %></span>
+<% end %>
