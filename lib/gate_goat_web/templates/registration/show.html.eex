@@ -51,6 +51,13 @@
     </li>
   <% end %>
 
+  <%= if display_lunch_option(@registration.event_id) do %>
+    <li>
+    <strong>Lunch:</strong>
+    <%= @registration.lunch_option %>
+    </li>
+  <% end %>
+
   <%= if display_camping_option(@registration.event_id) do %>
     <li>
       <strong>Camping:</strong>

@@ -22,6 +22,11 @@
     <%= @event.feast_fee %>
   </li>
 
+ <li>
+    <strong>Lunch Fee:</strong>
+    <%= @event.lunch_fee %>
+  </li>
+
   <li>
   <strong>Camping Fee:</strong>
   <%= @event.camping_fee %>

@@ -14,9 +14,10 @@ defmodule GateGoatWeb.RegistrationView do
     end
   end
 
-  def payment(%GateGoat.Events.Registration{feast_option: feast_option, camping_option: camping_option, event_id: event_id, member_option: member_option}) do
+  def payment(%GateGoat.Events.Registration{feast_option: feast_option, lunch_option: lunch_option, camping_option: camping_option, event_id: event_id, member_option: member_option}) do
     get_event_fee(event_id)
     |> Decimal.add(get_feast_fee(event_id, feast_option))
+    |> Decimal.add(get_lunch_fee(event_id, lunch_option))
     |> Decimal.add(get_camping_fee(event_id, camping_option))
     |> Decimal.add(get_non_member_surcharge(member_option))
   end
@@ -33,6 +34,10 @@ defmodule GateGoatWeb.RegistrationView do
     GateGoat.Events.get_event!(event_id).camping_fee != Decimal.new(0)
   end
 
+  def display_lunch_option(event_id) do
+    GateGoat.Events.get_event!(event_id).lunch_fee != Decimal.new(0)
+  end
+
   def checks_payable(event_id) do
     GateGoat.Events.get_event!(event_id).checks_payable
   end
@@ -46,6 +51,12 @@ defmodule GateGoatWeb.RegistrationView do
     GateGoat.Events.get_event!(event_id).feast_fee
   end
   def get_feast_fee(event_id), do: get_feast_fee(event_id, true)
+
+  def get_lunch_fee(_, false), do: 0
+  def get_lunch_fee(event_id, true) do
+    GateGoat.Events.get_event!(event_id).lunch_fee
+  end
+  def get_lunch_fee(event_id), do: get_lunch_fee(event_id, true)
 
   def get_camping_fee(_, false), do: 0
   def get_camping_fee(event_id, true) do

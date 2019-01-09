@@ -12,6 +12,7 @@ defmodule GateGoat.Events.Registration do
     field :sca_name, :string
     field :waiver, :boolean, default: false
     field :feast_option, :boolean, default: false
+    field :lunch_option, :boolean, default: false
     field :camping_option, :boolean, default: false
     field :member_option, :boolean, default: true
     field :verified, :boolean, default: false
@@ -27,8 +28,8 @@ defmodule GateGoat.Events.Registration do
   end
   def changeset(registration, attrs) do
     registration
-    |> cast(attrs, [:sca_name, :legal_name, :membership_number, :membership_expiration_date, :group_name, :waiver, :feast_option, :camping_option, :member_option, :verified])
-    |> validate_required([:sca_name, :legal_name, :waiver, :feast_option, :camping_option, :member_option])
+    |> cast(attrs, [:sca_name, :legal_name, :membership_number, :membership_expiration_date, :group_name, :waiver, :feast_option, :lunch_option, :camping_option, :member_option, :verified])
+    |> validate_required([:sca_name, :legal_name, :waiver, :feast_option, :lunch_option, :camping_option, :member_option])
     |> validate_acceptance(:waiver, [message: "Waiver must be accepted."])
     |> validate_membership_info(attrs)
   end
