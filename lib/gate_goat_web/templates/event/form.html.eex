@@ -37,6 +37,12 @@
     </div>
 
   <div class="form-group">
+    <%= label f, :lunch_fee, class: "control-label" %>
+    <%= text_input f, :lunch_fee, class: "form-control" %>
+    <%= error_tag f, :lunch_fee %>
+  </div>
+
+  <div class="form-group">
       <%= label f, :checks_payable, class: "control-label" %>
       <%= text_input f, :checks_payable, class: "form-control" %>
       <%= error_tag f, :checks_payable %>

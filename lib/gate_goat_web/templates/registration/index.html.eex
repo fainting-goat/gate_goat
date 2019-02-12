@@ -10,6 +10,7 @@
       <th>Membership Number</th>
       <th>Group Name</th>
       <th>Feast Option</th>
+      <th>Lunch Option</th>
       <th>Camping Option</th>
       <th>Waiver</th>
       <th>Updated</th>
@@ -29,6 +30,11 @@
       <td><%= registration.group_name %></td>
       <%= if display_feast_option(registration.event.id) do %>
         <td><%= registration.feast_option %></td>
+      <% else %>
+        <td>N/A</td>
+      <% end %>
+      <%= if display_lunch_option(registration.event.id) do %>
+        <td><%= registration.lunch_option %></td>
       <% else %>
         <td>N/A</td>
       <% end %>
