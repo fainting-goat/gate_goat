@@ -10,7 +10,7 @@
         <td>
           <label><%= event.event_name %></label>
           <%= GateGoat.Events.elixir_to_human_date(event.event_date) %>
-          <br>Registration: $<%= event.event_fee %>
+          <br>Registration: $<%= event.site_fee %>
           <%= if event.feast_fee != Decimal.new(0) do %><br>Feast: $<%= event.feast_fee %><% end %>
           <%= if event.lunch_fee != Decimal.new(0) do %><br>Lunch: $<%= event.lunch_fee %><% end %>
           <%= if event.camping_fee != Decimal.new(0) do %><br>Camping: $<%= event.camping_fee %><% end %>

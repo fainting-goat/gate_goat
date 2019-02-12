@@ -3,6 +3,7 @@ defmodule GateGoat.Events.Registration do
   import Ecto.Changeset
 
   alias GateGoat.Events.Event
+  alias GateGoat.Events.RegistrationEventFee
 
   schema "registrations" do
     field :group_name, :string
@@ -17,6 +18,7 @@ defmodule GateGoat.Events.Registration do
     field :member_option, :boolean, default: true
     field :verified, :boolean, default: false
     belongs_to :event, Event
+    has_many :registration_event_fee, RegistrationEventFee
 
     timestamps()
   end

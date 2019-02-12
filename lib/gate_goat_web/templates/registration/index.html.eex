@@ -28,7 +28,7 @@
       <td><%= registration.legal_name %></td>
       <td><%= registration.membership_number %></td>
       <td><%= registration.group_name %></td>
-      <%= if display_feast_option(registration.event.id) do %>
+      <%= if display_feast_option (registration.event.id) do %>
         <td><%= registration.feast_option %></td>
       <% else %>
         <td>N/A</td>

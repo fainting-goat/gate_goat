@@ -30,6 +30,7 @@ defmodule GateGoatWeb.Router do
     pipe_through [:protected, :admin, :browser]
 
     resources "/events", EventController
+    resources "/fees", FeeController
     resources "/users", UserController, only: [:index, :delete, :show, :create, :new]
     resources "/register", RegistrationController, only: [:index, :delete]
   end

@@ -3,17 +3,19 @@ defmodule GateGoat.Events.Event do
   import Ecto.Changeset
 
   alias GateGoat.Events.Registration
+  alias GateGoat.Events.EventFee
 
   schema "events" do
     field :camping_fee, :decimal
     field :event_date, :date
-    field :event_fee, :decimal
+    field :site_fee, :decimal
     field :event_name, :string
     field :feast_fee, :decimal
     field :lunch_fee, :decimal
     field :checks_payable, :string
     field :feast_available, :boolean, default: true
     has_many :registration, Registration
+    has_many :event_fee, EventFee
 
     timestamps()
   end
@@ -21,11 +23,9 @@ defmodule GateGoat.Events.Event do
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:event_name, :camping_fee, :event_fee, :feast_fee, :lunch_fee, :event_date, :checks_payable, :feast_available])
-    |> validate_required([:event_name, :camping_fee, :event_fee, :feast_fee, :lunch_fee, :event_date, :checks_payable, :feast_available])
-    |> validate_fee(:event_fee)
-    |> validate_fee(:camping_fee)
-    |> validate_fee(:feast_fee)
+    |> cast(attrs, [:event_name, :camping_fee, :site_fee, :feast_fee, :lunch_fee, :event_date, :checks_payable, :feast_available])
+    |> validate_required([:event_name, :camping_fee, :site_fee, :feast_fee, :lunch_fee, :event_date, :checks_payable, :feast_available])
+    |> cast_assoc(:event_fee)
     |> validate_event_date(:event_date)
   end
 

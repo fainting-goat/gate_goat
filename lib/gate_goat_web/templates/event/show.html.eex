@@ -12,27 +12,14 @@
     <%= @event.event_date %>
   </li>
 
-  <li>
-    <strong>Event Fee:</strong>
-    <%= @event.event_fee %>
-  </li>
-
-  <li>
-    <strong>Feast Fee:</strong>
-    <%= @event.feast_fee %>
-  </li>
-
- <li>
-    <strong>Lunch Fee:</strong>
-    <%= @event.lunch_fee %>
-  </li>
-
-  <li>
-  <strong>Camping Fee:</strong>
-  <%= @event.camping_fee %>
-  </li>
-
+  <%= for fee <- @event.event_fee do %>
     <li>
+      <strong><%= fee.fee.name %>:</strong>
+      <%= fee.amount %>
+    </li>
+  <% end %>
+
+  <li>
     <strong>Checks Payable:</strong>
     <%= @event.checks_payable %>
     </li>

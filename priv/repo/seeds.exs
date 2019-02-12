@@ -8,10 +8,10 @@ event_changeset1 = Event.changeset(
   %{
     event_name: "Test Event",
     event_date: ~D[2022-12-08],
-    event_fee: 10,
+    site_fee: 10,
     feast_fee: 10,
     camping_fee: 0,
-    lunch_fee: 0,
+    lunch_fee: 2,
     checks_payable: "Test Event",
     feast_available: true
   }
@@ -22,10 +22,10 @@ event_changeset2 = Event.changeset(
   %{
     event_name: "Demo Event",
     event_date: ~D[2020-12-20],
-    event_fee: 10,
+    site_fee: 10,
     feast_fee: 8,
     camping_fee: 5,
-    lunch_fee: 2,
+    lunch_fee: 0,
     checks_payable: "Demo Event",
     feast_available: true
   }
@@ -77,3 +77,47 @@ Repo.update!(admin_change)
 user_change = Ecto.Changeset.change(user)
 user_change = Ecto.Changeset.put_assoc(user_change, :role, user_role)
 Repo.update!(user_change)
+
+GateGoat.Events.create_registration(%{
+  "membership_number" => "1234",
+  "membership_expiration_date" => "12/20/2023",
+  "legal_name" => "test",
+  "sca_name" => "test",
+  "waiver" => true,
+  "feast_option" => false,
+  "lunch_option" => false,
+  "camping_option" => false,
+  "member_option" => true}, 1)
+
+GateGoat.Events.create_registration(%{
+  "membership_number" => "1234",
+  "membership_expiration_date" => "12/20/2023",
+  "legal_name" => "test",
+  "sca_name" => "test",
+  "waiver" => true,
+  "feast_option" => true,
+  "lunch_option" => false,
+  "camping_option" => false,
+  "member_option" => true}, 1)
+
+GateGoat.Events.create_registration(%{
+  "membership_number" => "1234",
+  "membership_expiration_date" => "12/20/2023",
+  "legal_name" => "test",
+  "sca_name" => "test",
+  "waiver" => true,
+  "feast_option" => false,
+  "lunch_option" => true,
+  "camping_option" => false,
+  "member_option" => true}, 1)
+
+GateGoat.Events.create_registration(%{
+  "membership_number" => "1234",
+  "membership_expiration_date" => "12/20/2023",
+  "legal_name" => "test",
+  "sca_name" => "test",
+  "waiver" => true,
+  "feast_option" => true,
+  "lunch_option" => true,
+  "camping_option" => false,
+  "member_option" => true}, 1)

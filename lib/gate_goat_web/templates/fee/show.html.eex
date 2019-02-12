@@ -1,0 +1,13 @@
+<h1>Show Fee</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @fee.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.fee_path(@conn, :edit, @fee) %></span>
+<span><%= link "Back", to: Routes.fee_path(@conn, :index) %></span>

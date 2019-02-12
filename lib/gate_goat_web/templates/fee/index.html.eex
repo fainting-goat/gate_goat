@@ -1,0 +1,27 @@
+<h1>Listing Fees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for fee <- @fees do %>
+    <tr>
+      <td><%= fee.name %></td>
+
+      <td>
+        <%= link "Show", to: Routes.fee_path(@conn, :show, fee) %>
+        <%= link "Edit", to: Routes.fee_path(@conn, :edit, fee) %>
+        <%= link "Delete", to: Routes.fee_path(@conn, :delete, fee), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "Back", to: Routes.admin_path(@conn, :index) %></span>
+ | <span><%= link "New Fee", to: Routes.fee_path(@conn, :new) %></span>

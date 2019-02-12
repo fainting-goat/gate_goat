@@ -142,9 +142,9 @@ defmodule GateGoat.EventsTest do
   describe "events" do
     alias GateGoat.Events.Event
 
-    @valid_attrs %{camping_fee: 42, event_date: ~D[2010-04-17], event_fee: 42, event_name: "some event_name", feast_fee: 42}
-    @update_attrs %{camping_fee: 43, event_date: ~D[2011-05-18], event_fee: 43, event_name: "some updated event_name", feast_fee: 43}
-    @invalid_attrs %{camping_fee: nil, event_date: nil, event_fee: nil, event_name: nil, feast_fee: nil}
+    @valid_attrs %{camping_fee: 42, event_date: ~D[2010-04-17], site_fee: 42, event_name: "some event_name", feast_fee: 42}
+    @update_attrs %{camping_fee: 43, event_date: ~D[2011-05-18], site_fee: 43, event_name: "some updated event_name", feast_fee: 43}
+    @invalid_attrs %{camping_fee: nil, event_date: nil, site_fee: nil, event_name: nil, feast_fee: nil}
 
     def event_fixture(attrs \\ %{}) do
       {:ok, event} =
@@ -169,7 +169,7 @@ defmodule GateGoat.EventsTest do
       assert {:ok, %Event{} = event} = Events.create_event(@valid_attrs)
       assert event.camping_fee == 42
       assert event.event_date == ~D[2010-04-17]
-      assert event.event_fee == 42
+      assert event.site_fee == 42
       assert event.event_name == "some event_name"
       assert event.feast_fee == 42
     end
@@ -184,7 +184,7 @@ defmodule GateGoat.EventsTest do
       assert %Event{} = event
       assert event.camping_fee == 43
       assert event.event_date == ~D[2011-05-18]
-      assert event.event_fee == 43
+      assert event.site_fee == 43
       assert event.event_name == "some updated event_name"
       assert event.feast_fee == 43
     end
@@ -204,6 +204,67 @@ defmodule GateGoat.EventsTest do
     test "change_event/1 returns a event changeset" do
       event = event_fixture()
       assert %Ecto.Changeset{} = Events.change_event(event)
+    end
+  end
+
+  describe "fees" do
+    alias GateGoat.Events.Fee
+
+    @valid_attrs %{amount: "120.5", name: "some name"}
+    @update_attrs %{amount: "456.7", name: "some updated name"}
+    @invalid_attrs %{amount: nil, name: nil}
+
+    def fee_fixture(attrs \\ %{}) do
+      {:ok, fee} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Events.create_fee()
+
+      fee
+    end
+
+    test "list_fees/0 returns all fees" do
+      fee = fee_fixture()
+      assert Events.list_fees() == [fee]
+    end
+
+    test "get_fee!/1 returns the fee with given id" do
+      fee = fee_fixture()
+      assert Events.get_fee!(fee.id) == fee
+    end
+
+    test "create_fee/1 with valid data creates a fee" do
+      assert {:ok, %Fee{} = fee} = Events.create_fee(@valid_attrs)
+      assert fee.amount == Decimal.new("120.5")
+      assert fee.name == "some name"
+    end
+
+    test "create_fee/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Events.create_fee(@invalid_attrs)
+    end
+
+    test "update_fee/2 with valid data updates the fee" do
+      fee = fee_fixture()
+      assert {:ok, %Fee{} = fee} = Events.update_fee(fee, @update_attrs)
+      assert fee.amount == Decimal.new("456.7")
+      assert fee.name == "some updated name"
+    end
+
+    test "update_fee/2 with invalid data returns error changeset" do
+      fee = fee_fixture()
+      assert {:error, %Ecto.Changeset{}} = Events.update_fee(fee, @invalid_attrs)
+      assert fee == Events.get_fee!(fee.id)
+    end
+
+    test "delete_fee/1 deletes the fee" do
+      fee = fee_fixture()
+      assert {:ok, %Fee{}} = Events.delete_fee(fee)
+      assert_raise Ecto.NoResultsError, fn -> Events.get_fee!(fee.id) end
+    end
+
+    test "change_fee/1 returns a fee changeset" do
+      fee = fee_fixture()
+      assert %Ecto.Changeset{} = Events.change_fee(fee)
     end
   end
 end

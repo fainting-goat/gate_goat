@@ -5,25 +5,25 @@
     <tr>
       <th>Event Name</th>
       <th>Event Date</th>
-      <th>Event Fee</th>
-      <th>Feast Fee</th>
-      <th>Lunch Fee</th>
-      <th>Camping Fee</th>
       <th>Checks Payable</th>
-
+      <th>Fees</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for event <- @events do %>
+  <%= for event <- @events do %>
     <tr>
       <td><%= event.event_name %></td>
       <td><%= event.event_date %></td>
-      <td><%= event.event_fee %></td>
-      <td><%= event.feast_fee %></td>
-      <td><%= event.lunch_fee %></td>
-      <td><%= event.camping_fee %></td>
       <td><%= event.checks_payable %></td>
+
+      <td>
+        <ul>
+          <%= for fee <- event.event_fee do %>
+            <li><%= fee.fee.name %> : <%= fee.amount %></li>
+          <% end %>
+        </ul>
+      </td>
 
       <td class="text-right">
         <span><%= link "Show", to: Routes.event_path(@conn, :show, event), class: "btn btn-default btn-xs" %></span>

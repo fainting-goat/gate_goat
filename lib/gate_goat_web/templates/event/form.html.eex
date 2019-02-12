@@ -18,29 +18,13 @@
     (mm/dd/yyyy)
   </div>
 
-  <div class="form-group">
-    <%= label f, :event_fee, class: "control-label" %>
-    <%= text_input f, :event_fee, class: "form-control" %>
-    <%= error_tag f, :event_fee %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :camping_fee, class: "control-label" %>
-    <%= text_input f, :camping_fee, class: "form-control" %>
-    <%= error_tag f, :camping_fee %>
-  </div>
-
-  <div class="form-group">
-      <%= label f, :feast_fee, class: "control-label" %>
-      <%= text_input f, :feast_fee, class: "form-control" %>
-      <%= error_tag f, :feast_fee %>
+  <%= inputs_for f, :event_fee, fn ef -> %>
+    <div class="form-group">
+      <%= label f, ef.data.fee, class: "control-label" %>
+      <%= text_input ef,:amount, class: "form-control" %>
+      <%= error_tag ef, :amount %>
     </div>
-
-  <div class="form-group">
-    <%= label f, :lunch_fee, class: "control-label" %>
-    <%= text_input f, :lunch_fee, class: "form-control" %>
-    <%= error_tag f, :lunch_fee %>
-  </div>
+  <% end %>
 
   <div class="form-group">
       <%= label f, :checks_payable, class: "control-label" %>

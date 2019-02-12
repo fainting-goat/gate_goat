@@ -43,7 +43,7 @@ defmodule GateGoatWeb.RegistrationView do
   end
 
   defp get_event_fee(event_id) do
-    GateGoat.Events.get_event!(event_id).event_fee
+    GateGoat.Events.get_event!(event_id).site_fee
   end
 
   def get_feast_fee(_, false), do: 0
