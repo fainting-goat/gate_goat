@@ -1,69 +1,13 @@
 <h2>You are now registered for <%= GateGoat.Events.get_event!(@registration.event_id).event_name %>.</h2>
  <h2>Confirmation Number: <%= @registration.id %></h2>
 
-<div><b>Please stay on this screen.  You will need to show <b>both</b> your <b>confirmation number</b> and <b>blue card</b>.</b></div>
+  <div><b>Please stay on this screen.  You will need to show <b>both</b> your <b>confirmation number</b> and <b>blue card</b>.</b></div>
 
-<hr>
+  <hr>
 
-<h3>Payment</h3>
-<div>You will pay: $<%= payment(@registration) %></div>
-<div>Please make all checks out to: <%= checks_payable(@registration.event_id) %></div>
-
-<hr>
-
-<ul>
-
-  <li>
-    <strong>SCA Name:</strong>
-    <%= @registration.sca_name %>
-  </li>
-
-  <li>
-    <strong>Legal Name:</strong>
-    <%= @registration.legal_name %>
-  </li>
-
-  <%= if @registration.member_option == true do %>
-    <li>
-      <strong>Membership Number:</strong>
-      <%= @registration.membership_number %>
-    </li>
-
-    <li>
-      <strong>Membership Expiration Date:</strong>
-      <%= GateGoat.Events.elixir_to_human_date(@registration.membership_expiration_date) %>
-    </li>
-  <% else %>
-    <li>
-      <strong>Non-Member:</strong> $5 surcharge added
-    </li>
-  <% end %>
-
-  <li>
-    <strong>Home Group:</strong>
-    <%= @registration.group_name %>
-  </li>
-
-  <%= if display_feast_option(@registration.event_id) do %>
-    <li>
-    <strong>Feast:</strong>
-    <%= @registration.feast_option %>
-    </li>
-  <% end %>
-
-  <%= if display_lunch_option(@registration.event_id) do %>
-    <li>
-    <strong>Lunch:</strong>
-    <%= @registration.lunch_option %>
-    </li>
-  <% end %>
-
-  <%= if display_camping_option(@registration.event_id) do %>
-    <li>
-      <strong>Camping:</strong>
-      <%= @registration.camping_option %>
-    </li>
-  <% end %>
+  <h3>Payment</h3>
+  <div>You will pay: $<%= payment(@registration) %></div>
+  <div>Please make all checks out to: <%= checks_payable(@registration.event_id) %></div>
 
   <span><%= link "Back", to: Routes.gate_goat_path(@conn, :index) %></span>
 </ul>
