@@ -20,7 +20,9 @@
 
   <%= inputs_for f, :event_fee, fn ef -> %>
     <div class="form-group">
-      <%= label f, ef.data.fee, class: "control-label" %>
+      <%= inputs_for ef, :fee, fn ff -> %>
+        <%= label ff, ff.data.name, class: "control-label" %>
+      <% end %>
       <%= text_input ef,:amount, class: "form-control" %>
       <%= error_tag ef, :amount %>
     </div>

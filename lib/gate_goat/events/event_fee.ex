@@ -18,7 +18,26 @@ defmodule GateGoat.Events.EventFee do
   def changeset(event_fee, attrs) do
     event_fee
     |> cast(attrs, [:amount, :fee_id, :event_id])
-    |> cast_assoc(:fee)
+    |> validate_fee(:amount)
+    |> create_fee_assoc(attrs)
     |> validate_required([:amount])
+  end
+
+  def create_fee_assoc(event_fee, %{"fee" => %{"id" => id}}) do
+    event_fee
+    |> put_assoc(:fee, GateGoat.Events.get_fee!(id))
+  end
+  def create_fee_assoc(event_fee, _) do
+    event_fee
+  end
+
+  def validate_fee(changeset, field) do
+    validate_change(changeset, field, fn _, fee ->
+      if Regex.match?(~r/^\d+\.?[\d]?[\d]?$/, to_string(fee)) do
+        []
+      else
+        [{field, "Fee is in an invalid format."}]
+      end
+    end)
   end
 end

@@ -24,19 +24,9 @@ defmodule GateGoat.Events.Event do
   def changeset(event, attrs) do
     event
     |> cast(attrs, [:event_name, :camping_fee, :site_fee, :feast_fee, :lunch_fee, :event_date, :checks_payable, :feast_available])
-    |> validate_required([:event_name, :camping_fee, :site_fee, :feast_fee, :lunch_fee, :event_date, :checks_payable, :feast_available])
-    |> cast_assoc(:event_fee)
+    |> validate_required([:event_name, :event_date, :checks_payable, :feast_available])
+    |> cast_assoc(:event_fee, with: &GateGoat.Events.EventFee.changeset/2)
     |> validate_event_date(:event_date)
-  end
-
-  def validate_fee(changeset, field) do
-    validate_change(changeset, field, fn _, fee ->
-      if Regex.match?(~r/^\d+\.?[\d]?[\d]?$/, to_string(fee)) do
-        []
-      else
-        [{field, "Fee is in an invalid format."}]
-      end
-    end)
   end
 
   def validate_event_date(changeset, field) do

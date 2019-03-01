@@ -1,5 +1,6 @@
 <h2>New Event</h2>
 
+<p>If you do not want a fee on your event, leave the value as 0.</p>
 <%= render "form.html", Map.put(assigns, :action, Routes.event_path(@conn, :create)) %>
 
 <span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>

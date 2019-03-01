@@ -230,6 +230,11 @@ defmodule GateGoat.Events do
     Event.changeset(event, %{})
   end
 
+  def new_event_with_fees() do
+    all_fees = Enum.reduce(list_fees(), [], fn x, acc ->[%GateGoat.Events.EventFee{fee: x, amount: 0} | acc] end)
+    Event.changeset(%Event{event_fee: all_fees}, %{})
+  end
+
   def human_to_elixir_date(date) do
     if date =~ "/" do
       [month, day, year] = String.split(date, "/")
