@@ -56,20 +56,11 @@
     <%= @registration.group_name %>
   </li>
 
-  <li>
-  <strong>Feast:</strong>
-  <%= @registration.feast_option %>
-  </li>
-
-  <li>
-    <strong>Lunch:</strong>
-    <%= @registration.lunch_option %>
-    </li>
-
-  <li>
-    <strong>Camping:</strong>
-    <%= @registration.camping_option %>
-  </li>
+  <%= for fee <- @registration.registration_event_fee do %>
+    <li>
+    <strong><%= fee.event_fee.fee.name %></strong>
+    <%= fee.selected %>
+  <% end %>
 
   <li>
     <strong>Waiver:</strong>

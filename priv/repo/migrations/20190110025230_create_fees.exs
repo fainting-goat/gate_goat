@@ -19,6 +19,7 @@ defmodule GateGoat.Repo.Migrations.CreateFees do
     create table(:registration_event_fees) do
       add :event_fee_id, references(:event_fees)
       add :registration_id, references(:registrations)
+      add :selected, :boolean, default: false
 
       timestamps()
     end

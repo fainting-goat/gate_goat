@@ -38,21 +38,18 @@
     <%= error_tag f, :group_name %>
   </div>
 
-  <%= if display_feast_option(@event_id) do %>
-    <div>
-      Feast?  ($<%= get_feast_fee(@event_id) %>) Yes <%= radio_button(f, :feast_option, "true") %> No <%= radio_button(f, :feast_option, "false") %>
-      <h6><font color="red">Note: GateGoat only calculates cost, it does  not guarantee a seat at feast.</font></h6>
-    </div>
-  <% end %>
-
-   <%= if display_lunch_option(@event_id) do %>
-    <div>
-      Lunch?  ($<%= get_lunch_fee(@event_id) %>) Yes <%= radio_button(f, :lunch_option, "true") %> No <%= radio_button(f, :lunch_option, "false") %>
-    </div>
-  <% end %>
-
-  <%= if display_camping_option(@event_id) do %>
-    <div><p>Camping? ($<%= get_camping_fee(@event_id) %>) Yes <%= radio_button(f, :camping_option, "true") %> No <%= radio_button(f, :camping_option, "false") %></p></div>
+  <%= inputs_for f, :registration_event_fee, fn ef -> %>
+    <%= inputs_for ef, :event_fee, fn ff -> %>
+      <%= if display_fee?(ff.data) do %>
+        <div class="form-group">
+          <%= fee_name(ff.data.id) %>?  ($<%= ff.data.amount %>)
+          Yes <%= radio_button(ef, :selected, "true") %> No <%= radio_button(ef, :selected, "false") %>
+          <%= if fee_name(ff.data.id) == "Feast" do %>
+            <h6><font color="red">Note: GateGoat only calculates cost, it does  not guarantee a seat at feast.</font></h6>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 
   <%= render "waiver.html" %>

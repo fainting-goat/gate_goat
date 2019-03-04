@@ -32,13 +32,11 @@ Enum.each(current_registrations, fn(person) ->
                 |> Repo.one
   lunch_fee_id = from(e in EventFee, where: e.fee_id == ^lunch_fee.id and e.event_id == ^person.event_id)
                 |> Repo.one
+  camping_fee_id = from(e in EventFee, where: e.fee_id == ^camping_fee.id and e.event_id == ^person.event_id)
+                 |> Repo.one
 
-  if person.feast_option do
-    Repo.insert!(%RegistrationEventFee{registration_id: person.id, event_fee_id: feast_fee_id.id})
-  end
-  if person.lunch_option do
-    Repo.insert!(%RegistrationEventFee{registration_id: person.id, event_fee_id: lunch_fee_id.id})
-  end
-
-  Repo.insert!(%RegistrationEventFee{registration_id: person.id, event_fee_id: site_fee_id.id})
+  Repo.insert!(%RegistrationEventFee{registration_id: person.id, event_fee_id: feast_fee_id.id, selected: person.feast_option})
+  Repo.insert!(%RegistrationEventFee{registration_id: person.id, event_fee_id: lunch_fee_id.id, selected: person.lunch_option})
+  Repo.insert!(%RegistrationEventFee{registration_id: person.id, event_fee_id: site_fee_id.id, selected: true})
+  Repo.insert!(%RegistrationEventFee{registration_id: person.id, event_fee_id: camping_fee_id.id, selected: person.camping_option})
 end)

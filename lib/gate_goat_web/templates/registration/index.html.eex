@@ -9,9 +9,9 @@
       <th>Legal Name</th>
       <th>Membership Number</th>
       <th>Group Name</th>
-      <th>Feast Option</th>
-      <th>Lunch Option</th>
-      <th>Camping Option</th>
+      <%= for fee <- GateGoat.Events.list_fees() do %>
+        <th><%= fee.name %></th>
+      <% end %>
       <th>Waiver</th>
       <th>Updated</th>
       <th>Created</th>
@@ -28,20 +28,8 @@
       <td><%= registration.legal_name %></td>
       <td><%= registration.membership_number %></td>
       <td><%= registration.group_name %></td>
-      <%= if display_feast_option (registration.event.id) do %>
-        <td><%= registration.feast_option %></td>
-      <% else %>
-        <td>N/A</td>
-      <% end %>
-      <%= if display_lunch_option(registration.event.id) do %>
-        <td><%= registration.lunch_option %></td>
-      <% else %>
-        <td>N/A</td>
-      <% end %>
-      <%= if display_camping_option(registration.event.id) do %>
-        <td><%= registration.camping_option %></td>
-      <% else %>
-        <td>N/A</td>
+      <%= for fee <- registration.registration_event_fee do %>
+        <td><%= fee.selected %></td>
       <% end %>
       <td><%= registration.waiver %></td>
       <td><%= registration.updated_at %></td>

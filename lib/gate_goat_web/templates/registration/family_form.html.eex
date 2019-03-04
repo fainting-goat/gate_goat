@@ -43,14 +43,6 @@
     <%= error_tag f, :group_name %>
   </div>
 
-  <%= if display_feast_option(@event_id) do %>
-    <div><p>Feast?  ($<%= get_feast_fee(@event_id) %>) Yes <%= radio_button(f, :feast_option, "true") %> No <%= radio_button(f, :feast_option, "false") %></p></div>
-  <% end %>
-
-  <%= if display_camping_option(@event_id) do %>
-    <div><p>Camping? ($<%= get_camping_fee(@event_id) %>) Yes <%= radio_button(f, :camping_option, "true") %> No <%= radio_button(f, :camping_option, "false") %></p></div>
-  <% end %>
-
   <%= render "waiver.html" %>
 
   <div class="form-group">

@@ -21,12 +21,13 @@ defmodule GateGoat.Events do
   end
   def list_registrations do
     Repo.all(Registration)
-    |> Repo.preload([:registration_event_fee, :event, {:event, :event_fee}])
+    |> Repo.preload([:registration_event_fee, :event, {:event, :event_fee}, {:registration_event_fee, :fee}])
   end
 
   def list_registrations_events do
     Repo.all(from r in Registration, order_by: r.id)
-    |> Repo.preload([:registration_event_fee, :event, {:event, :event_fee}])
+    |> Repo.preload([:event, {:event, :event_fee}])
+    |> Repo.preload([:registration_event_fee, {:registration_event_fee, [:event_fee, {:event_fee, :fee}]}])
   end
 
   @doc """
@@ -43,8 +44,16 @@ defmodule GateGoat.Events do
       ** (Ecto.NoResultsError)
 
   """
-  def get_registration!(id), do: Repo.get!(Registration, id) |> Repo.preload(:event)
-  def get_registration(id), do: Repo.get(Registration, id) |> Repo.preload(:event)
+  def get_registration!(id) do
+    Repo.get!(Registration, id)
+    |> Repo.preload([:event, {:event, :event_fee}])
+    |> Repo.preload([:registration_event_fee, {:registration_event_fee, [:event_fee, {:event_fee, :fee}]}])
+  end
+  def get_registration(id) do
+    Repo.get(Registration, id)
+    |> Repo.preload([:event, {:event, :event_fee}])
+    |> Repo.preload([:registration_event_fee, {:registration_event_fee, [:event_fee, {:event_fee, :fee}]}])
+  end
 
   @doc """
   Creates a registration.
@@ -116,6 +125,13 @@ defmodule GateGoat.Events do
   end
     def change_registration(%Registration{} = registration) do
     Registration.changeset(registration, %{})
+  end
+
+  def new_registration_with_fees(event_id) do
+    all_fees = Enum.reduce(list_fees_for_event(event_id), [], fn x, acc ->
+      [%GateGoat.Events.RegistrationEventFee{event_fee: x} | acc]
+    end)
+    Registration.changeset(%Registration{registration_event_fee: all_fees}, %{})
   end
 
   alias GateGoat.Events.Event
@@ -363,5 +379,14 @@ defmodule GateGoat.Events do
   """
   def change_fee(%Fee{} = fee) do
     Fee.changeset(fee, %{})
+  end
+
+  def list_fees_for_event(event_id) do
+    Repo.all(from c in GateGoat.Events.EventFee, where: c.event_id == ^event_id)
+  end
+
+  def get_event_fee!(id) do
+    Repo.get!(GateGoat.Events.EventFee, id)
+    |> Repo.preload(:fee)
   end
 end
