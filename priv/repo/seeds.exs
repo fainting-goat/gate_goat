@@ -11,6 +11,7 @@ event_changeset1 = Event.changeset(
     event_fee: 10,
     feast_fee: 10,
     camping_fee: 0,
+    lunch_fee: 0,
     checks_payable: "Test Event",
     feast_available: true
   }
@@ -24,6 +25,7 @@ event_changeset2 = Event.changeset(
     event_fee: 10,
     feast_fee: 8,
     camping_fee: 5,
+    lunch_fee: 2,
     checks_payable: "Demo Event",
     feast_available: true
   }
