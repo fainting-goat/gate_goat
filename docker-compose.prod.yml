@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+  app:
+    build: .
+    container_name: gate_goat
+    volumes:
+      - "$HOME/.ssh:/tmp/host-ssh"
+      - "$PWD:/app"
+    environment:
+      MIX_ENV: prod
+      PORT: 4001
+      DB_NAME: gate_goat-pg
+    networks:
+      - internal
+    ports:
+      - "4001:4001"
+    links:
+      - postgres
+    command: ["mix", "phx.server"]
+
+  postgres:
+    image: postgres:9.4
+    container_name: gate_goat-pg
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "legitanythingelseplease"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - internal
+       # Mapping internal PG ports so that we can access it in the host via pgAdmin etc.
+#    ports:
+#      - "5432:5432"
+
+networks:
+  internal:
+
+volumes:
+  pgdata:
