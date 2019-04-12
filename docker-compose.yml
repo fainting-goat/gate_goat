@@ -8,6 +8,8 @@ services:
       - "$PWD:/app"
     environment:
       MIX_ENV: dev
+      DB_NAME: gate_goat-pg
+      PORT: 4000
     networks:
       - internal
     ports:
@@ -31,7 +33,7 @@ services:
     container_name: gate_goat-pg
     environment:
       POSTGRES_USER: "admin"
-      POSTGRES_PASSWORD: "admin"
+      POSTGRES_PASSWORD: "redacted"
     networks:
       - internal
     volumes:
