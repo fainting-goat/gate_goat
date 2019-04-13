@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+docker-compose -f docker-compose.demo.yml down  # Verify environment is fresh
+docker-compose -f docker-compose.demo.yml up -d postgres
+
+STARTTIME=$(date +%s)
+
+while true
+do
+  echo "[$(($(date +%s) - $STARTTIME))s] Waiting for postgres to be ready..."
+  docker-compose run --rm postgres psql postgresql://admin:redacted@postgres/template1 -c select 1 > /dev/null 2>&1 \
+    && break
+done
+
+docker-compose -f docker-compose.demo.yml run --rm app bash -c "mix do deps.get, deps.compile, ecto.migrate"
+docker-compose -f docker-compose.demo.yml up -d app

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+docker-compose -f docker-compose.demo.yml run --rm app "$@"

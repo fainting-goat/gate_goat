@@ -15,7 +15,9 @@ use Mix.Config
 # which you typically run after static files are built.
 config :gate_goat, GateGoatWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "localhost", port: 4001],
+  url: [host: "localhost", port: System.get_env("PORT")],
+  http: [port: System.get_env("PORT")],
+  check_origin: ["https://gategoat.com", "https://www.gategoat.com", "http://gategoat.com", "http://www.gategoat.com", "http://demo.gategoat.com", "https://demo.gategoat.com"],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production

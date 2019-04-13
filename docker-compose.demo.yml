@@ -1,0 +1,35 @@
+version: "2"
+
+services:
+  demo:
+    build: .
+    container_name: gate_goat_demo
+    volumes:
+      - "$HOME/.ssh:/tmp/host-ssh"
+      - "$PWD:/app"
+    environment:
+      MIX_ENV: prod
+      PORT: 4002
+      DB_NAME: gate_goat_demo-pg
+    networks:
+      - internal_demo
+    ports:
+      - "4002:4002"
+    links:
+      - demo_postgres
+    command: ["mix", "phx.server"]
+
+  demo_postgres:
+    image: postgres:9.4
+    container_name: gate_goat_demo-pg
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "redacted"
+    networks:
+      - internal_demo
+       # Mapping internal PG ports so that we can access it in the host via pgAdmin etc.
+#    ports:
+#      - "5432:5432"
+
+networks:
+  internal_demo:
