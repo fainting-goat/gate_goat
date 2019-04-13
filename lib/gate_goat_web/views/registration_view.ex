@@ -29,8 +29,6 @@ defmodule GateGoatWeb.RegistrationView do
 
   def fee_name(event_fee_id) do
     GateGoat.Events.get_event_fee!(event_fee_id).fee.name
-    |> String.split(" ")
-    |> List.first()
   end
 
   def display_fee?(event_fee) do

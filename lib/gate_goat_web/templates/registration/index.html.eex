@@ -4,14 +4,12 @@
   <thead>
     <tr>
       <th>Event</th>
-      <th>Confirmation Number</th>
+      <th>ID</th>
       <th>SCA Name</th>
       <th>Legal Name</th>
       <th>Membership Number</th>
       <th>Group Name</th>
-      <%= for fee <- GateGoat.Events.list_fees() do %>
-        <th><%= fee.name %></th>
-      <% end %>
+      <th>Fees</th>
       <th>Waiver</th>
       <th>Updated</th>
       <th>Created</th>
@@ -28,9 +26,11 @@
       <td><%= registration.legal_name %></td>
       <td><%= registration.membership_number %></td>
       <td><%= registration.group_name %></td>
-      <%= for fee <- registration.registration_event_fee do %>
-        <td><%= fee.selected %></td>
-      <% end %>
+      <td>
+        <%= for fee <- registration.registration_event_fee do %>
+          <%= GateGoat.Events.get_event_fee!(fee.event_fee_id).fee.name %><br>
+        <% end %>
+      </td>
       <td><%= registration.waiver %></td>
       <td><%= registration.updated_at %></td>
       <td><%= registration.inserted_at %></td>
