@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-docker-compose -f docker-compose.demo.yml run --rm app bash -c "mix do deps.get, deps.compile, ecto.migrate, run priv/repo/update_seeds.exs"
+docker-compose -f docker-compose.demo.yml run --rm demo bash -c "mix do deps.get, deps.compile, ecto.migrate, run priv/repo/update_seeds.exs"
