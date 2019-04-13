@@ -3,7 +3,7 @@
 set -euo pipefail
 
 docker-compose -f docker-compose.demo.yml down  # Verify environment is fresh
-docker-compose -f docker-compose.demo.yml up -d postgres
+docker-compose -f docker-compose.demo.yml up -d demo_postgres
 
 STARTTIME=$(date +%s)
 
