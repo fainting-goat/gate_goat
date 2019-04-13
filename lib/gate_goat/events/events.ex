@@ -383,6 +383,7 @@ defmodule GateGoat.Events do
 
   def list_fees_for_event(event_id) do
     Repo.all(from c in GateGoat.Events.EventFee, where: c.event_id == ^event_id)
+    |> Repo.preload(:fee)
   end
 
   def get_event_fee!(id) do

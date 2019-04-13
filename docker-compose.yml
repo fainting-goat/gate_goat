@@ -33,7 +33,7 @@ services:
     container_name: gate_goat-pg
     environment:
       POSTGRES_USER: "admin"
-      POSTGRES_PASSWORD: "redacted"
+      POSTGRES_PASSWORD: "admin"
     networks:
       - internal
     volumes:
