@@ -8,6 +8,7 @@
 
 <%= if GateGoat.AdminHelper.admin?(@conn) do %>
   <div><span><%= link "Manage Events", to: Routes.event_path(@conn, :index) %></span></div>
+  <div><span><%= link "Manage Fees", to: Routes.fee_path(@conn, :index) %></span></div>
   <div><span><%= link "Manage Registrations", to: Routes.registration_path(@conn, :index) %></span></div>
   <div><span><%= link "Manage Users", to: Routes.user_path(@conn, :index) %></span></div>
 <% else %>

@@ -10,7 +10,7 @@ defmodule GateGoatWeb.RegistrationController do
   end
 
   def new(conn, %{"event_id" => event_id}) do
-    changeset = Events.change_registration(%Registration{})
+    changeset = Events.new_registration_with_fees(event_id)
     render(conn, "new.html", changeset: changeset, event_id: event_id)
   end
   def new(conn, _params) do

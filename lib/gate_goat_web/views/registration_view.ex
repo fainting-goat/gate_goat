@@ -14,55 +14,37 @@ defmodule GateGoatWeb.RegistrationView do
     end
   end
 
-  def payment(%GateGoat.Events.Registration{feast_option: feast_option, lunch_option: lunch_option, camping_option: camping_option, event_id: event_id, member_option: member_option}) do
-    get_event_fee(event_id)
-    |> Decimal.add(get_feast_fee(event_id, feast_option))
-    |> Decimal.add(get_lunch_fee(event_id, lunch_option))
-    |> Decimal.add(get_camping_fee(event_id, camping_option))
-    |> Decimal.add(get_non_member_surcharge(member_option))
+  def payment(%GateGoat.Events.Registration{registration_event_fee: fees}) do
+    Enum.reduce(fees, Decimal.new(0), fn x, acc ->
+      add_fees(x.selected, acc, x.event_fee.amount)
+    end)
   end
+
+  def add_fees(true, total, fee), do: Decimal.add(total, fee)
+  def add_fees(false, total, _), do: total
 
   def event_name(event_id) do
     GateGoat.Events.get_event!(event_id).event_name
   end
 
-  def display_feast_option(event_id) do
-    GateGoat.Events.get_event!(event_id).feast_fee != Decimal.new(0) && GateGoat.Events.get_event!(event_id).feast_available
+  def fee_name(event_fee_id) do
+    GateGoat.Events.get_event_fee!(event_fee_id).fee.name
   end
 
-  def display_camping_option(event_id) do
-    GateGoat.Events.get_event!(event_id).camping_fee != Decimal.new(0)
+  def display_fee?(event_fee) do
+    fee_name = GateGoat.Events.get_event_fee!(event_fee.id).fee.name
+    display_fee?(event_fee.amount, fee_name, event_fee.event_id)
   end
-
-  def display_lunch_option(event_id) do
-    GateGoat.Events.get_event!(event_id).lunch_fee != Decimal.new(0)
+  def display_fee?(%Decimal{coef: 0}, _, _), do: false
+  def display_fee?(_, "Site Fee", _), do: false
+  def display_fee?(_, "Feast Fee", event_id) do
+    GateGoat.Events.get_event!(event_id).feast_available
   end
+  def display_fee?(_, _, _), do: true
 
   def checks_payable(event_id) do
     GateGoat.Events.get_event!(event_id).checks_payable
   end
-
-  defp get_event_fee(event_id) do
-    GateGoat.Events.get_event!(event_id).event_fee
-  end
-
-  def get_feast_fee(_, false), do: 0
-  def get_feast_fee(event_id, true) do
-    GateGoat.Events.get_event!(event_id).feast_fee
-  end
-  def get_feast_fee(event_id), do: get_feast_fee(event_id, true)
-
-  def get_lunch_fee(_, false), do: 0
-  def get_lunch_fee(event_id, true) do
-    GateGoat.Events.get_event!(event_id).lunch_fee
-  end
-  def get_lunch_fee(event_id), do: get_lunch_fee(event_id, true)
-
-  def get_camping_fee(_, false), do: 0
-  def get_camping_fee(event_id, true) do
-    GateGoat.Events.get_event!(event_id).camping_fee
-  end
-  def get_camping_fee(event_id), do: get_camping_fee(event_id, true)
 
   def get_non_member_surcharge(false), do: 5
   def get_non_member_surcharge(true), do: 0

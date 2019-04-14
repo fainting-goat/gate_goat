@@ -10,7 +10,7 @@ defmodule GateGoatWeb.EventController do
   end
 
   def new(conn, _params) do
-    changeset = Events.change_event(%Event{})
+    changeset = Events.new_event_with_fees()
     render(conn, "new.html", changeset: changeset)
   end
 

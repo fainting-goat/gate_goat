@@ -3,7 +3,7 @@
 set -euo pipefail
 
 docker-compose -f docker-compose.demo.yml down  # Verify environment is fresh
-docker-compose -f docker-compose.demo.yml up -d postgres
+docker-compose -f docker-compose.demo.yml up -d demo_postgres
 
 STARTTIME=$(date +%s)
 
@@ -14,5 +14,5 @@ do
     && break
 done
 
-docker-compose -f docker-compose.demo.yml run --rm app bash -c "mix do deps.get, deps.compile, ecto.migrate"
-docker-compose -f docker-compose.demo.yml up -d app
+docker-compose -f docker-compose.demo.yml run --rm demo bash -c "mix do deps.get, deps.compile, ecto.migrate"
+docker-compose -f docker-compose.demo.yml up -d demo

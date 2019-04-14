@@ -3,6 +3,7 @@ defmodule GateGoat.Events.Registration do
   import Ecto.Changeset
 
   alias GateGoat.Events.Event
+  alias GateGoat.Events.RegistrationEventFee
 
   schema "registrations" do
     field :group_name, :string
@@ -17,6 +18,7 @@ defmodule GateGoat.Events.Registration do
     field :member_option, :boolean, default: true
     field :verified, :boolean, default: false
     belongs_to :event, Event
+    has_many :registration_event_fee, RegistrationEventFee
 
     timestamps()
   end
@@ -28,8 +30,9 @@ defmodule GateGoat.Events.Registration do
   end
   def changeset(registration, attrs) do
     registration
-    |> cast(attrs, [:sca_name, :legal_name, :membership_number, :membership_expiration_date, :group_name, :waiver, :feast_option, :lunch_option, :camping_option, :member_option, :verified])
-    |> validate_required([:sca_name, :legal_name, :waiver, :feast_option, :lunch_option, :camping_option, :member_option])
+    |> cast(attrs, [:sca_name, :legal_name, :membership_number, :membership_expiration_date, :group_name, :waiver, :member_option, :verified])
+    |> validate_required([:sca_name, :legal_name, :waiver, :member_option])
+    |> cast_assoc(:registration_event_fee, with: &GateGoat.Events.RegistrationEventFee.changeset/2)
     |> validate_acceptance(:waiver, [message: "Waiver must be accepted."])
     |> validate_membership_info(attrs)
   end

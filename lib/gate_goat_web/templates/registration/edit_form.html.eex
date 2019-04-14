@@ -38,9 +38,14 @@
     <%= error_tag f, :group_name %>
   </div>
 
-  <div><p>Feast? Yes <%= radio_button(f, :feast_option, "true") %> No <%= radio_button(f, :feast_option, "false") %></p></div>
-  <div><p>Lunch? Yes <%= radio_button(f, :lunch_option, "true") %> No <%= radio_button(f, :lunch_option, "false") %></p></div>
-  <div><p>Camping? Yes <%= radio_button(f, :camping_option, "true") %> No <%= radio_button(f, :camping_option, "false") %></p></div>
+  <%= inputs_for f, :registration_event_fee, fn ef -> %>
+    <div class="form-group">
+      <%= inputs_for ef, :event_fee, fn ff -> %>
+        <%= label ff, ff.data.fee.name, class: "control-label" %>
+      <% end %>
+      Yes <%= radio_button(ef, :selected, "true") %> No <%= radio_button(ef, :selected, "false") %>
+    </div>
+  <% end %>
 
   <div class="form-group">
     <%= checkbox f, :waiver %>
