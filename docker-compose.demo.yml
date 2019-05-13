@@ -25,6 +25,8 @@ services:
     environment:
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "redacted"
+    volumes:
+      - pgdata_demo:/var/lib/postgresql/data
     networks:
       - internal_demo
        # Mapping internal PG ports so that we can access it in the host via pgAdmin etc.
@@ -33,3 +35,6 @@ services:
 
 networks:
   internal_demo:
+
+volumes:
+  pgdata_demo:
