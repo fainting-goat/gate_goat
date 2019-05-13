@@ -32,7 +32,7 @@ defmodule GateGoat.Events.RegistrationEventFee do
   end
 
   defp update_site_fee(%{"event_fee" => %{"id" => id}} = attrs) do
-    if GateGoat.Events.get_event_fee!(id).fee.name == "Site Fee" do
+    if GateGoat.Events.get_event_fee!(id).fee.name == "Site" do
       %{"event_fee" => %{"id" => id}, "selected" => "true"}
     else
       attrs

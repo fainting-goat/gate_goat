@@ -36,8 +36,8 @@ defmodule GateGoatWeb.RegistrationView do
     display_fee?(event_fee.amount, fee_name, event_fee.event_id)
   end
   def display_fee?(%Decimal{coef: 0}, _, _), do: false
-  def display_fee?(_, "Site Fee", _), do: false
-  def display_fee?(_, "Feast Fee", event_id) do
+  def display_fee?(_, "Site", _), do: false
+  def display_fee?(_, "Feast", event_id) do
     GateGoat.Events.get_event!(event_id).feast_available
   end
   def display_fee?(_, _, _), do: true
