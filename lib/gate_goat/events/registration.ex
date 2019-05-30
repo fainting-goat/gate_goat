@@ -12,9 +12,6 @@ defmodule GateGoat.Events.Registration do
     field :legal_name, :string
     field :sca_name, :string
     field :waiver, :boolean, default: false
-    field :feast_option, :boolean, default: false
-    field :lunch_option, :boolean, default: false
-    field :camping_option, :boolean, default: false
     field :member_option, :boolean, default: true
     field :verified, :boolean, default: false
     belongs_to :event, Event
