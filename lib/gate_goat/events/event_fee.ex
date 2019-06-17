@@ -3,7 +3,7 @@ defmodule GateGoat.Events.EventFee do
   import Ecto.Changeset
 
   alias GateGoat.Events.Event
-  alias GateGoat.Events.Fee
+  alias GateGoat.Fees.Fee
 
   schema "event_fees" do
     field :amount, :decimal
@@ -25,7 +25,7 @@ defmodule GateGoat.Events.EventFee do
 
   def create_fee_assoc(event_fee, %{"fee" => %{"id" => id}}) do
     event_fee
-    |> put_assoc(:fee, GateGoat.Events.get_fee!(id))
+    |> put_assoc(:fee, GateGoat.Fees.get_fee!(id))
   end
   def create_fee_assoc(event_fee, _) do
     event_fee

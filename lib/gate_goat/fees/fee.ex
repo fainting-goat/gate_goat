@@ -1,4 +1,4 @@
-defmodule GateGoat.Events.Fee do
+defmodule GateGoat.Fees.Fee do
   use Ecto.Schema
   import Ecto.Changeset
 

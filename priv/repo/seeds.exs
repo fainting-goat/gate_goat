@@ -2,9 +2,9 @@ alias GateGoat.Repo
 alias GateGoat.Events.Event
 alias GateGoat.Users.User
 alias GateGoat.Users.Role
-alias GateGoat.Events.Fee
+alias GateGoat.Fees.Fee
 alias GateGoat.Events.EventFee
-alias GateGoat.Events.RegistrationEventFee
+alias GateGoat.Registrations.RegistrationEventFee
 
 admin_role_changest = Role.changeset(
   %Role{},
@@ -50,9 +50,9 @@ user_change = Ecto.Changeset.change(user)
 user_change = Ecto.Changeset.put_assoc(user_change, :role, user_role)
 Repo.update!(user_change)
 
-{:ok, feast_fee} = GateGoat.Events.create_fee(%{name: "Feast"})
-{:ok, site_fee} =  GateGoat.Events.create_fee(%{name: "Site"})
-{:ok, camping_fee} =  GateGoat.Events.create_fee(%{name: "Camping"})
+{:ok, feast_fee} = GateGoat.Fees.create_fee(%{name: "Feast"})
+{:ok, site_fee} =  GateGoat.Fees.create_fee(%{name: "Site"})
+{:ok, camping_fee} =  GateGoat.Fees.create_fee(%{name: "Camping"})
 
 event_changeset1 = Event.changeset(
   %Event{},
@@ -139,7 +139,7 @@ event2_feast_fee = Repo.insert!(event2_feast)
 event2_site_fee = Repo.insert!(event2_site)
 event2_camping_fee = Repo.insert!(event2_camping)
 
-{:ok, reg1} = GateGoat.Events.create_registration(%{
+{:ok, reg1} = GateGoat.Registrations.create_registration(%{
   "membership_number" => "1234",
   "membership_expiration_date" => "12/20/2023",
   "legal_name" => "test",
@@ -147,7 +147,7 @@ event2_camping_fee = Repo.insert!(event2_camping)
   "waiver" => true,
   "member_option" => true,}, 1)
 
-{:ok, reg2} = GateGoat.Events.create_registration(%{
+{:ok, reg2} = GateGoat.Registrations.create_registration(%{
   "membership_number" => "1234",
   "membership_expiration_date" => "12/20/2023",
   "legal_name" => "test",

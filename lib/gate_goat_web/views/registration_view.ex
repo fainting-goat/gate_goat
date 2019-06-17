@@ -14,7 +14,7 @@ defmodule GateGoatWeb.RegistrationView do
     end
   end
 
-  def payment(%GateGoat.Events.Registration{registration_event_fee: fees}) do
+  def payment(%GateGoat.Registrations.Registration{registration_event_fee: fees}) do
     Enum.reduce(fees, Decimal.new(0), fn x, acc ->
       add_fees(x.selected, acc, x.event_fee.amount)
     end)
@@ -28,11 +28,11 @@ defmodule GateGoatWeb.RegistrationView do
   end
 
   def fee_name(event_fee_id) do
-    GateGoat.Events.get_event_fee!(event_fee_id).fee.name
+    GateGoat.Fees.get_event_fee!(event_fee_id).fee.name
   end
 
   def display_fee?(event_fee) do
-    fee_name = GateGoat.Events.get_event_fee!(event_fee.id).fee.name
+    fee_name = GateGoat.Fees.get_event_fee!(event_fee.id).fee.name
     display_fee?(event_fee.amount, fee_name, event_fee.event_id)
   end
   def display_fee?(%Decimal{coef: 0}, _, _), do: false

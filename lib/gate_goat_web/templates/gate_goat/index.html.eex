@@ -9,8 +9,8 @@
         </td>
         <td>
           <label><%= event.event_name %></label>
-          <%= GateGoat.Events.elixir_to_human_date(event.event_date) %>
-          <%= for fee <- GateGoat.Events.list_fees_for_event(event.id) do %>
+          <%= GateGoat.Helpers.elixir_to_human_date(event.event_date) %>
+          <%= for fee <- GateGoat.Fees.list_fees_for_event(event.id) do %>
             <%= unless fee.amount == Decimal.new(0) do %>
               <br><%= fee.fee.name %>: $<%= fee.amount %>
             <% end %>

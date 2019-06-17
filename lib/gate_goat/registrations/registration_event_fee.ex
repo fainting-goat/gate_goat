@@ -1,8 +1,8 @@
-defmodule GateGoat.Events.RegistrationEventFee do
+defmodule GateGoat.Registrations.RegistrationEventFee do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias GateGoat.Events.Registration
+  alias GateGoat.Registrations.Registration
   alias GateGoat.Events.EventFee
 
   schema "registration_event_fees" do
@@ -25,14 +25,14 @@ defmodule GateGoat.Events.RegistrationEventFee do
 
   def create_event_fee_assoc(registration_event_fee, %{"event_fee" => %{"id" => id}}) do
     registration_event_fee
-    |> put_assoc(:event_fee, GateGoat.Events.get_event_fee!(id))
+    |> put_assoc(:event_fee, GateGoat.Fees.get_event_fee!(id))
   end
   def create_event_fee_assoc(registration_event_fee, _) do
     registration_event_fee
   end
 
   defp update_site_fee(%{"event_fee" => %{"id" => id}} = attrs) do
-    if GateGoat.Events.get_event_fee!(id).fee.name == "Site" do
+    if GateGoat.Fees.get_event_fee!(id).fee.name == "Site" do
       %{"event_fee" => %{"id" => id}, "selected" => "true"}
     else
       attrs
