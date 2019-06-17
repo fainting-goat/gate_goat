@@ -1,4 +1,5 @@
 defmodule GateGoat.Helpers do
+  def human_to_elixir_date(nil), do: nil
   def human_to_elixir_date(date) do
     if date =~ "/" do
       [month, day, year] = String.split(date, "/")

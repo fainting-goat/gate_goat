@@ -45,11 +45,11 @@ defmodule GateGoat.Registrations do
   """
   def get_registration!(id) do
     Repo.get!(Registration, id)
-    |> Repo.preload([:registration_event_fee, {:event, [{:event_fee, :fee}]}])
+    |> Repo.preload([:registration_event_fee, {:registration_event_fee, [{:event_fee, :fee}]}, {:event, [{:event_fee, :fee}]}])
   end
   def get_registration(id) do
     Repo.get(Registration, id)
-    |> Repo.preload([:registration_event_fee, {:event, [{:event_fee, :fee}]}])
+    |> Repo.preload([:registration_event_fee, {:registration_event_fee, [{:event_fee, :fee}]}, {:event, [{:event_fee, :fee}]}])
   end
 
   @doc """

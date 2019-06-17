@@ -1,6 +1,7 @@
 defmodule GateGoatWeb.LookupController do
   use GateGoatWeb, :controller
 
+  alias GateGoat.Registrations
   alias GateGoat.Events
 
   def lookup(conn, %{"action" => "disable", "feast" => %{"event" => event_id}}) do
@@ -10,7 +11,7 @@ defmodule GateGoatWeb.LookupController do
     render_feast_change(conn, event_id, true, "enabled")
   end
   def lookup(conn, %{"search" => %{"confirmation_number" => registration_id}}) do
-    registration = Events.get_registration(registration_id)
+    registration = Registrations.get_registration(registration_id)
 
     cond do
       !Regex.match?(~r/^\d+$/, registration_id) || registration == nil ->
@@ -26,8 +27,8 @@ defmodule GateGoatWeb.LookupController do
     end
   end
   def lookup(conn, %{"registration" => registration_id}) do
-    registration = Events.get_registration(registration_id)
-    Events.update_registration(registration, %{verified: true})
+    registration = Registrations.get_registration(registration_id)
+    Registrations.update_registration(registration, %{verified: true})
 
     conn
     |> put_flash(:info, "User verified.")
