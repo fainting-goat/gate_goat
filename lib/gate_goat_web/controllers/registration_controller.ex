@@ -43,7 +43,7 @@ defmodule GateGoatWeb.RegistrationController do
   def update(conn, %{"id" => id, "registration" => registration_params}) do
     registration = Registrations.get_registration!(id)
 
-    case Events.update_registration(registration, registration_params) do
+    case Registrations.update_registration(registration, registration_params) do
       {:ok, registration} ->
         conn
         |> put_flash(:info, "Registration updated successfully.")
