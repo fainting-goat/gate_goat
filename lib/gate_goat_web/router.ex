@@ -33,6 +33,7 @@ defmodule GateGoatWeb.Router do
     resources "/fees", FeeController
     resources "/users", UserController, only: [:index, :delete, :show, :create, :new]
     resources "/register", RegistrationController, only: [:index, :delete]
+    resources "/activities", ActivityController, only: [:delete, :create, :new, :edit, :update]
   end
 
   scope "/", GateGoatWeb do
@@ -53,11 +54,17 @@ defmodule GateGoatWeb.Router do
     get "/about", GateGoatController, :about
     get "/event/:id", GateGoatController, :register
     resources "/register", RegistrationController, only: [:show, :create, :new]
+    resources "/activities", ActivityController, only: [:index, :show]
+
+    resources "/events", EventController do
+      resources "/activities", ActivityController, only: [:index]
+    end
 
     get "/login", LoginController, :login
     post "/login", LoginController, :login
     post "/logout", LoginController, :logout
   end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", GateGoatWeb do

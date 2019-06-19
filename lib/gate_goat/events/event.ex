@@ -4,6 +4,7 @@ defmodule GateGoat.Events.Event do
 
   alias GateGoat.Registrations.Registration
   alias GateGoat.Events.EventFee
+  alias GateGoat.Activities.Activity
 
   schema "events" do
     field :event_date, :date
@@ -12,6 +13,7 @@ defmodule GateGoat.Events.Event do
     field :feast_available, :boolean, default: true
     has_many :registration, Registration
     has_many :event_fee, EventFee
+    has_many :activities, Activity
 
     timestamps()
   end

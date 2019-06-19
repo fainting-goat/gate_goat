@@ -6,6 +6,7 @@
       <tr>
         <td class="text-right">
           <span><%= link "Register", to: Routes.gate_goat_path(@conn, :register, event), class: "button" %></span>
+          <span><%= link "View Schedule", to: Routes.event_activity_path(@conn, :index, event), class: "button" %></span>
         </td>
         <td>
           <label><%= event.event_name %></label>

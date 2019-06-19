@@ -1,0 +1,28 @@
+<h1>Listing Activities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Start time</th>
+      <th>Duration</th>
+      <th>Description</th>
+      <th>Owner</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for activity <- @activities do %>
+    <tr>
+      <td><%= activity.name %></td>
+      <td><%= activity.start_time %></td>
+      <td><%= activity.duration %></td>
+      <td><%= activity.description %></td>
+      <td><%= activity.owner %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "Back", to: Routes.gate_goat_path(@conn, :index) %></span>

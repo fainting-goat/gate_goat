@@ -11,6 +11,7 @@
   <div><span><%= link "Manage Fees", to: Routes.fee_path(@conn, :index) %></span></div>
   <div><span><%= link "Manage Registrations", to: Routes.registration_path(@conn, :index) %></span></div>
   <div><span><%= link "Manage Users", to: Routes.user_path(@conn, :index) %></span></div>
+  <div><span><%= link "Manage Activities", to: Routes.activity_path(@conn, :index) %></span></div>
 <% else %>
   <div><span><%= link "Update User Password", to: Routes.user_path(@conn, :edit, GateGoat.AdminHelper.user_id(@conn)) %></span></div>
 <% end %>

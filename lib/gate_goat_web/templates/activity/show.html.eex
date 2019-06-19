@@ -1,0 +1,33 @@
+<h1>Show Activity</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @activity.name %>
+  </li>
+
+  <li>
+    <strong>Start time:</strong>
+    <%= @activity.start_time %>
+  </li>
+
+  <li>
+    <strong>Duration:</strong>
+    <%= @activity.duration %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @activity.description %>
+  </li>
+
+  <li>
+    <strong>Owner:</strong>
+    <%= @activity.owner %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.activity_path(@conn, :edit, @activity) %></span>
+<span><%= link "Back", to: Routes.activity_path(@conn, :index) %></span>
