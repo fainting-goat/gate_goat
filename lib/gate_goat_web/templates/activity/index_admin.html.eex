@@ -8,6 +8,7 @@
       <th>Duration</th>
       <th>Description</th>
       <th>Owner</th>
+      <th>Replaced By</th>
 
       <th></th>
     </tr>
@@ -20,6 +21,7 @@
       <td><%= activity.duration %></td>
       <td><%= activity.description %></td>
       <td><%= activity.owner %></td>
+      <td><%= activity.replaced_by_id %></td>
 
       <td>
         <%= link "Show", to: Routes.activity_path(@conn, :show, activity) %>

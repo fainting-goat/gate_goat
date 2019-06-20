@@ -22,7 +22,7 @@ defmodule GateGoat.Activities do
   end
 
   def list_activities_for_event(event_id) do
-    Repo.all(from c in Activity, where: c.event_id == ^event_id)
+    Repo.all(from c in Activity, where: c.event_id == ^event_id and is_nil(c.replaced_by_id))
   end
 
   @doc """
@@ -75,8 +75,12 @@ defmodule GateGoat.Activities do
 
   """
   def update_activity(%Activity{} = activity, attrs) do
+    {:ok, new_activity} = attrs
+    |> Map.delete("event")
+    |> create_activity()
+
     activity
-    |> Activity.changeset(attrs)
+    |> Activity.changeset(%{replaced_by_id: new_activity.id})
     |> Repo.update()
   end
 
@@ -109,8 +113,10 @@ defmodule GateGoat.Activities do
     Activity.changeset(activity, %{})
   end
 
-#  def new_activit_with_eventss() do
-#    all_events = Enum.reduce(GateGoat.Events.list_current_events(), [], fn x, acc ->[%GateGoat.Events.Event{fee: x, amount: 0} | acc] end)
-#    Event.changeset(%Event{event_fee: all_fees}, %{})
-#  end
+  def updated_activities(activities) do
+    Enum.reduce(activities, [], fn(x, acc) ->
+      [item] = Repo.all(from c in Activity, where: c.replaced_by_id == ^x.id)
+      [item | acc]
+    end)
+  end
 end
