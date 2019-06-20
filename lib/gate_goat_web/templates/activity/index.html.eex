@@ -1,29 +1,33 @@
-<h3>The following activities have been modified:</h3>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Time Updated</th>
-      <th>Changes</th>
-    </tr>
-  </thead>
+<%= if GateGoat.Activities.updated_activities(@activities) != [] do %>
 
-  <tbody>
-  <%= for activity <- GateGoat.Activities.updated_activities(@activities) do %>
+  <h3>The following activities have been modified:</h3>
+  <table>
+    <thead>
       <tr>
-        <td><%= activity.name %></td>
-        <td><%= make_human_readable(activity.inserted_at) %></td>
-        <td>
-          <ul>
-            <%= for item <- items_changed(activity) do %>
-              <li><%= "#{item.name}: #{item.old_value} -> #{item.new_value}" %></li>
-            <% end %>
-          </ul>
-        </td>
+        <th>Name</th>
+        <th>Time Updated</th>
+        <th>Changes</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+    <%= for activity <- GateGoat.Activities.updated_activities(@activities) do %>
+        <tr>
+          <td><%= activity.name %></td>
+          <td><%= make_human_readable(activity.inserted_at) %></td>
+          <td>
+            <ul>
+              <%= for item <- items_changed(activity) do %>
+                <li><%= "#{item.name}: #{item.old_value} -> #{item.new_value}" %></li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+<% end %>
 
 <hr>
 <h1>Schedule</h1>

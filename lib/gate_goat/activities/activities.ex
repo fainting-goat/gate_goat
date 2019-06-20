@@ -115,8 +115,8 @@ defmodule GateGoat.Activities do
 
   def updated_activities(activities) do
     Enum.reduce(activities, [], fn(x, acc) ->
-      [item] = Repo.all(from c in Activity, where: c.replaced_by_id == ^x.id)
-      [item | acc]
+      item = Repo.all(from c in Activity, where: c.replaced_by_id == ^x.id)
+      acc ++ item
     end)
   end
 end
