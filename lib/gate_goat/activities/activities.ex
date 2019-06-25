@@ -18,7 +18,8 @@ defmodule GateGoat.Activities do
 
   """
   def list_activities do
-    Repo.all(Activity)
+    Repo.all(from c in Activity, where: is_nil(c.replaced_by_id))
+    |> Repo.preload(:event)
   end
 
   def list_activities_for_event(event_id) do
@@ -42,6 +43,10 @@ defmodule GateGoat.Activities do
   def get_activity!(id) do
     Repo.get!(Activity, id)
     |> Repo.preload(:event)
+  end
+
+  def get_activity_by_replacement(id) do
+    Repo.one(from c in Activity, where: c.replaced_by_id == ^id)
   end
 
   @doc """
@@ -75,10 +80,23 @@ defmodule GateGoat.Activities do
 
   """
   def update_activity(%Activity{} = activity, attrs) do
-    {:ok, new_activity} = attrs
+    with {:ok, new_activity} <- create_activity(attrs),
+         {:ok, activity} <- update_replaced_by_id(activity, new_activity)
+    do
+      {:ok, new_activity}
+    else
+      _ -> {:error, activity}
+    end
+  end
+
+  def create_new_activity(attrs) do
+    attrs
     |> Map.delete("event")
     |> create_activity()
+    |> Repo.preload(:event)
+  end
 
+  def update_replaced_by_id(activity, new_activity) do
     activity
     |> Activity.changeset(%{replaced_by_id: new_activity.id})
     |> Repo.update()
@@ -97,6 +115,11 @@ defmodule GateGoat.Activities do
 
   """
   def delete_activity(%Activity{} = activity) do
+    historical_activity = get_activity_by_replacement(activity.id)
+    unless historical_activity == nil do
+      delete_activity(historical_activity)
+    end
+
     Repo.delete(activity)
   end
 

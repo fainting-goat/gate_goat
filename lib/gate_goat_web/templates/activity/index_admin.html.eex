@@ -1,27 +1,39 @@
 <h1>Listing Activities</h1>
 
+<%= form_for @conn, Routes.activity_path(@conn, :create), fn f -> %>
+  <div class="form-group">
+    <label>
+      Event: <%= select f, :event, Enum.map(GateGoat.Events.list_current_events(), &{&1.event_name, &1.id}) %>
+    </label>
+    <%= submit "Filter", class: "button", name: "action", value: "filter" %>
+    <%= submit "Clear", class: "button", name: "action", value: "clear" %>
+  </div>
+<% end %>
+
+
 <table>
   <thead>
     <tr>
       <th>Name</th>
+      <th>Event</th>
       <th>Start time</th>
       <th>Duration</th>
       <th>Description</th>
       <th>Owner</th>
-      <th>Replaced By</th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
+
 <%= for activity <- @activities do %>
     <tr>
       <td><%= activity.name %></td>
+      <td><%= activity.event.event_name %></td>
       <td><%= activity.start_time %></td>
       <td><%= activity.duration %></td>
       <td><%= activity.description %></td>
       <td><%= activity.owner %></td>
-      <td><%= activity.replaced_by_id %></td>
 
       <td>
         <%= link "Show", to: Routes.activity_path(@conn, :show, activity) %>
@@ -33,4 +45,6 @@
   </tbody>
 </table>
 
-<span><%= link "New Activity", to: Routes.activity_path(@conn, :new) %></span>
+<%= for event <- GateGoat.Events.list_current_events() do %>
+  <span><%= link "New Activity for #{event.event_name}", to: Routes.event_activity_path(@conn, :new, event) %></span><br>
+<% end %>

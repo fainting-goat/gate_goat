@@ -5,6 +5,8 @@
     </div>
   <% end %>
 
+  <%= hidden_input f, :event_id %>
+
   <%= label f, :name %>
   <%= text_input f, :name %>
   <%= error_tag f, :name %>
@@ -27,12 +29,6 @@
   <%= label f, :owner %>
   <%= text_input f, :owner %>
   <%= error_tag f, :owner %>
-
-  <%= inputs_for f, :event, fn ef -> %>
-    <%= label f, :event %>
-    <%= select f, :event_id, Enum.map(GateGoat.Events.list_current_events(), &{&1.event_name, &1.id}) %>
-    <%= error_tag f, :event %>
-  <% end %>
 
   <div>
     <%= submit "Save" %>

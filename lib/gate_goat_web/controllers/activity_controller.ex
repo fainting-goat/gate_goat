@@ -17,11 +17,25 @@ defmodule GateGoatWeb.ActivityController do
     |> render("index_admin.html", activities: activities)
   end
 
-  def new(conn, _params) do
-    changeset = Activities.change_activity(%Activity{})
+  def new(conn, %{"event_id" => event_id}) do
+    event = GateGoat.Events.get_event!(event_id)
+    {:ok, date} = NaiveDateTime.new(event.event_date, ~T[00:00:00])
+
+    changeset = Activities.change_activity(%Activity{event_id: event_id, start_time: date})
     render(conn, "new.html", changeset: changeset)
   end
 
+  #this feels like cheating
+  def create(conn, %{"action" => "filter", "event" => event_id}) do
+    activities = Activities.list_activities_for_event(event_id)
+                 |> GateGoat.Repo.preload(:event)
+
+    conn
+    |> render("index_admin.html", activities: activities)
+  end
+  def create(conn, %{"action" => "clear"}) do
+    index(conn, nil)
+  end
   def create(conn, %{"activity" => activity_params}) do
     case Activities.create_activity(activity_params) do
       {:ok, activity} ->
