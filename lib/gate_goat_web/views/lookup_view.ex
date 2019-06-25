@@ -21,6 +21,11 @@ defmodule GateGoatWeb.LookupView do
     end
   end
 
+  def feast_selected?(registration) do
+    registration.registration_event_fee
+    |> Enum.any?(fn(reg) -> reg.event_fee.fee.name == "Feast" && reg.selected end)
+  end
+
   def feast_change(true, false), do: true
   def feast_change(_, _), do: false
 end
