@@ -19,6 +19,7 @@ defmodule GateGoat.Users.User do
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, [:username, :password, :role_id, :event_id])
+    |> validate_required([:username, :password])
     |> validate_length(:username, min: 1, max: 20)
     |> validate_length(:password, min: 8, max: 100)
     |> make_password_hash

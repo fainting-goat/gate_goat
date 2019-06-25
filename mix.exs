@@ -47,7 +47,8 @@ defmodule GateGoat.Mixfile do
       {:jason, "~> 1.0"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:guardian, "~> 1.0"}
+      {:guardian, "~> 1.0"},
+      {:double, "~> 0.7.0", only: :test}
     ]
   end
 

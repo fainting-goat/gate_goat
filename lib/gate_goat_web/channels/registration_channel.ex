@@ -2,7 +2,7 @@ defmodule GateGoatWeb.RegistrationChannel do
   use Phoenix.Channel
   alias Phoenix.HTML.FormData
   alias GateGoat.Events
-  alias GateGoat.Events.Registration
+  alias GateGoat.Registrations.Registration
 
   def join("registration", _message, socket) do
     {:ok, socket}

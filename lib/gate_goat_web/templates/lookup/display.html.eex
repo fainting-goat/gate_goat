@@ -48,7 +48,7 @@
 
   <li>
     <strong>Membership expiration date:</strong>
-    <%= GateGoat.Events.elixir_to_human_date(@registration.membership_expiration_date) %>
+    <%= GateGoat.Helpers.elixir_to_human_date(@registration.membership_expiration_date) %>
   </li>
 
   <li>

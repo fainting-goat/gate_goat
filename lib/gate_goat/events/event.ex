@@ -2,7 +2,7 @@ defmodule GateGoat.Events.Event do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias GateGoat.Events.Registration
+  alias GateGoat.Registrations.Registration
   alias GateGoat.Events.EventFee
 
   schema "events" do

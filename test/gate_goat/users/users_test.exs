@@ -6,15 +6,18 @@ defmodule GateGoat.UsersTest do
   describe "users" do
     alias GateGoat.Users.User
 
-    @valid_attrs %{}
-    @update_attrs %{}
-    @invalid_attrs %{}
+    @valid_attrs %{username: "some user", password: "password"}
+    @update_attrs %{username: "other user", password: "other password"}
+    @invalid_attrs %{username: "", password: ""}
 
     def user_fixture(attrs \\ %{}) do
-      {:ok, user} =
+      user =
         attrs
         |> Enum.into(@valid_attrs)
         |> Users.create_user()
+        |> elem(1)
+        |> GateGoat.Repo.preload(:role)
+        |> GateGoat.Repo.preload(:event)
 
       user
     end

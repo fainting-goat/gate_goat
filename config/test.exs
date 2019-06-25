@@ -11,8 +11,8 @@ config :logger, level: :warn
 
 # Configure your database
 config :gate_goat, GateGoat.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "gate_goat_dev",
-  hostname: "gate_goat_pg",
+  username: "admin",
+  password: "admin",
+  database: "gate_goat_test",
+  hostname: "gate_goat-pg-test",
   pool: Ecto.Adapters.SQL.Sandbox

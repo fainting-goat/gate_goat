@@ -1,9 +1,9 @@
-defmodule GateGoat.Events.Registration do
+defmodule GateGoat.Registrations.Registration do
   use Ecto.Schema
   import Ecto.Changeset
 
   alias GateGoat.Events.Event
-  alias GateGoat.Events.RegistrationEventFee
+  alias GateGoat.Registrations.RegistrationEventFee
 
   schema "registrations" do
     field :group_name, :string
@@ -29,7 +29,7 @@ defmodule GateGoat.Events.Registration do
     registration
     |> cast(attrs, [:sca_name, :legal_name, :membership_number, :membership_expiration_date, :group_name, :waiver, :member_option, :verified])
     |> validate_required([:sca_name, :legal_name, :waiver, :member_option])
-    |> cast_assoc(:registration_event_fee, with: &GateGoat.Events.RegistrationEventFee.changeset/2)
+    |> cast_assoc(:registration_event_fee, with: &GateGoat.Registrations.RegistrationEventFee.changeset/2)
     |> validate_acceptance(:waiver, [message: "Waiver must be accepted."])
     |> validate_membership_info(attrs)
   end

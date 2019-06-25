@@ -1,163 +1,52 @@
 defmodule GateGoat.EventsTest do
   use GateGoat.DataCase
 
+  import Double
+
   alias GateGoat.Events
-
-  describe "registrations" do
-    alias GateGoat.Events.Members
-
-    @valid_attrs %{group_name: "some group_name", membership_number: "some membership_number", legal_name: "some legal_name", sca_name: "some sca_name", waiver: true}
-    @update_attrs %{group_name: "some updated group_name", membership_number: "some updated membership_number", legal_name: "some updated legal_name", sca_name: "some updated sca_name", waiver: false}
-    @invalid_attrs %{group_name: nil, membership_number: nil, legal_name: nil, sca_name: nil, waiver: nil}
-
-    def members_fixture(attrs \\ %{}) do
-      {:ok, members} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Events.create_members()
-
-      members
-    end
-
-    test "list_registrations/0 returns all registrations" do
-      members = members_fixture()
-      assert Events.list_registrations() == [members]
-    end
-
-    test "get_members!/1 returns the members with given id" do
-      members = members_fixture()
-      assert Events.get_members!(members.id) == members
-    end
-
-    test "create_members/1 with valid data creates a members" do
-      assert {:ok, %Members{} = members} = Events.create_members(@valid_attrs)
-      assert members.group_name == "some group_name"
-      assert members.membership_number == "some membership_number"
-      assert members.legal_name == "some legal_name"
-      assert members.sca_name == "some sca_name"
-      assert members.waiver == true
-    end
-
-    test "create_members/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Events.create_members(@invalid_attrs)
-    end
-
-    test "update_members/2 with valid data updates the members" do
-      members = members_fixture()
-      assert {:ok, members} = Events.update_members(members, @update_attrs)
-      assert %Members{} = members
-      assert members.group_name == "some updated group_name"
-      assert members.membership_number == "some updated membership_number"
-      assert members.legal_name == "some updated legal_name"
-      assert members.sca_name == "some updated sca_name"
-      assert members.waiver == false
-    end
-
-    test "update_members/2 with invalid data returns error changeset" do
-      members = members_fixture()
-      assert {:error, %Ecto.Changeset{}} = Events.update_members(members, @invalid_attrs)
-      assert members == Events.get_members!(members.id)
-    end
-
-    test "delete_members/1 deletes the members" do
-      members = members_fixture()
-      assert {:ok, %Members{}} = Events.delete_members(members)
-      assert_raise Ecto.NoResultsError, fn -> Events.get_members!(members.id) end
-    end
-
-    test "change_members/1 returns a members changeset" do
-      members = members_fixture()
-      assert %Ecto.Changeset{} = Events.change_members(members)
-    end
-  end
-
-  describe "registrations" do
-    alias GateGoat.Events.Registration
-
-    @valid_attrs %{group_name: "some group_name", membership_number: "some membership_number", legal_name: "some legal_name", sca_name: "some sca_name", waiver: true}
-    @update_attrs %{group_name: "some updated group_name", membership_number: "some updated membership_number", legal_name: "some updated legal_name", sca_name: "some updated sca_name", waiver: false}
-    @invalid_attrs %{group_name: nil, membership_number: nil, legal_name: nil, sca_name: nil, waiver: nil}
-
-    def registration_fixture(attrs \\ %{}) do
-      {:ok, registration} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Events.create_registration()
-
-      registration
-    end
-
-    test "list_registrations/0 returns all registrations" do
-      registration = registration_fixture()
-      assert Events.list_registrations() == [registration]
-    end
-
-    test "get_registration!/1 returns the registration with given id" do
-      registration = registration_fixture()
-      assert Events.get_registration!(registration.id) == registration
-    end
-
-    test "create_registration/1 with valid data creates a registration" do
-      assert {:ok, %Registration{} = registration} = Events.create_registration(@valid_attrs)
-      assert registration.group_name == "some group_name"
-      assert registration.membership_number == "some membership_number"
-      assert registration.legal_name == "some legal_name"
-      assert registration.sca_name == "some sca_name"
-      assert registration.waiver == true
-    end
-
-    test "create_registration/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Events.create_registration(@invalid_attrs)
-    end
-
-    test "update_registration/2 with valid data updates the registration" do
-      registration = registration_fixture()
-      assert {:ok, registration} = Events.update_registration(registration, @update_attrs)
-      assert %Registration{} = registration
-      assert registration.group_name == "some updated group_name"
-      assert registration.membership_number == "some updated membership_number"
-      assert registration.legal_name == "some updated legal_name"
-      assert registration.sca_name == "some updated sca_name"
-      assert registration.waiver == false
-    end
-
-    test "update_registration/2 with invalid data returns error changeset" do
-      registration = registration_fixture()
-      assert {:error, %Ecto.Changeset{}} = Events.update_registration(registration, @invalid_attrs)
-      assert registration == Events.get_registration!(registration.id)
-    end
-
-    test "delete_registration/1 deletes the registration" do
-      registration = registration_fixture()
-      assert {:ok, %Registration{}} = Events.delete_registration(registration)
-      assert_raise Ecto.NoResultsError, fn -> Events.get_registration!(registration.id) end
-    end
-
-    test "change_registration/1 returns a registration changeset" do
-      registration = registration_fixture()
-      assert %Ecto.Changeset{} = Events.change_registration(registration)
-    end
-  end
 
   describe "events" do
     alias GateGoat.Events.Event
 
-    @valid_attrs %{camping_fee: 42, event_date: ~D[2010-04-17], site_fee: 42, event_name: "some event_name", feast_fee: 42}
-    @update_attrs %{camping_fee: 43, event_date: ~D[2011-05-18], site_fee: 43, event_name: "some updated event_name", feast_fee: 43}
-    @invalid_attrs %{camping_fee: nil, event_date: nil, site_fee: nil, event_name: nil, feast_fee: nil}
+    @valid_attrs %{"event_date" => "12/12/2099", "event_name" => "some event_name", "checks_payable" => "test"}
+    @update_attrs %{"event_date" => "02/11/2099", "event_name" => "some other name", "checks_payable" => "other thing"}
+    @invalid_attrs %{"event_date" => "02/11/2099", "event_name" => nil, "checks_payable" => nil}
+    @valid_attrs_with_fee %{"event_date" => "12/12/2099",
+      "event_name" => "some event_name",
+      "checks_payable" => "test",
+      "event_fee" => %{"0" => %{"amount" => "10", "fee" => %{"id" => "1"}}}}
 
     def event_fixture(attrs \\ %{}) do
-      {:ok, event} =
         attrs
         |> Enum.into(@valid_attrs)
         |> Events.create_event()
+        |> elem(1)
+        |> GateGoat.Repo.preload(:event_fee)
+    end
 
-      event
+    def event_with_fees_fixture(_attrs \\ %{}) do
+      {:ok, fee} = GateGoat.Fees.create_fee(%{name: "Test Fee"})
+
+      %{"event_fee" => %{"0" => %{"amount" => "10", "fee" => %{"id" => fee.id}}}}
+      |> Enum.into(@valid_attrs_with_fee)
+      |> Events.create_event()
+      |> elem(1)
+      |> GateGoat.Repo.preload(:event_fee)
     end
 
     test "list_events/0 returns all events" do
       event = event_fixture()
-      assert Events.list_events() == [event]
+      assert Enum.member?(Events.list_events(), event)
+    end
+
+    test "list_current_events/0 returns all events past today's date" do
+      datetime_stub = stub(DateTime, :utc_now, fn() ->
+        {:ok, date, _} =DateTime.from_iso8601("2100-01-23T23:50:07Z")
+        date
+      end)
+
+      event = event_fixture()
+      assert !Enum.member?(Events.list_current_events(datetime_stub), event)
     end
 
     test "get_event!/1 returns the event with given id" do
@@ -167,11 +56,24 @@ defmodule GateGoat.EventsTest do
 
     test "create_event/1 with valid data creates a event" do
       assert {:ok, %Event{} = event} = Events.create_event(@valid_attrs)
-      assert event.camping_fee == 42
-      assert event.event_date == ~D[2010-04-17]
-      assert event.site_fee == 42
+      assert event.event_date == ~D[2099-12-12]
       assert event.event_name == "some event_name"
-      assert event.feast_fee == 42
+      assert event.checks_payable == "test"
+    end
+
+    test "create_event/1 with valid data and fees creates a event" do
+      {:ok, fee} = GateGoat.Fees.create_fee(%{name: "Test Fee"})
+
+      attrs = %{"event_fee" => %{"0" => %{"amount" => "10", "fee" => %{"id" => fee.id}}}}
+      |> Enum.into(@valid_attrs_with_fee)
+
+      assert {:ok, %Event{} = event} = Events.create_event(attrs)
+      assert event.event_date == ~D[2099-12-12]
+      assert event.event_name == "some event_name"
+      assert event.checks_payable == "test"
+
+      event_fee = List.first(event.event_fee)
+      assert event_fee.fee_id == fee.id
     end
 
     test "create_event/1 with invalid data returns error changeset" do
@@ -182,11 +84,27 @@ defmodule GateGoat.EventsTest do
       event = event_fixture()
       assert {:ok, event} = Events.update_event(event, @update_attrs)
       assert %Event{} = event
-      assert event.camping_fee == 43
-      assert event.event_date == ~D[2011-05-18]
-      assert event.site_fee == 43
-      assert event.event_name == "some updated event_name"
-      assert event.feast_fee == 43
+      assert event.event_date == ~D[2099-02-11]
+      assert event.event_name == "some other name"
+      assert event.checks_payable == "other thing"
+    end
+
+    test "update_event/2 with valid data updates the fees" do
+      event = event_with_fees_fixture()
+      event_fee = event.event_fee
+      |> List.first
+
+      attrs = %{"event_fee" => %{"0" => %{"amount" => "20", "fee" => %{"id" => event_fee.fee_id}, "id" => event_fee.id}}}
+      |> Enum.into(@update_attrs)
+
+      assert {:ok, event} = Events.update_event(event, attrs)
+      assert %Event{} = event
+      assert event.event_date == ~D[2099-02-11]
+      assert event.event_name == "some other name"
+      assert event.checks_payable == "other thing"
+
+      event_fee = List.first(event.event_fee)
+      assert event_fee.amount == Decimal.new("20")
     end
 
     test "update_event/2 with invalid data returns error changeset" do
@@ -205,66 +123,10 @@ defmodule GateGoat.EventsTest do
       event = event_fixture()
       assert %Ecto.Changeset{} = Events.change_event(event)
     end
-  end
 
-  describe "fees" do
-    alias GateGoat.Events.Fee
-
-    @valid_attrs %{amount: "120.5", name: "some name"}
-    @update_attrs %{amount: "456.7", name: "some updated name"}
-    @invalid_attrs %{amount: nil, name: nil}
-
-    def fee_fixture(attrs \\ %{}) do
-      {:ok, fee} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Events.create_fee()
-
-      fee
-    end
-
-    test "list_fees/0 returns all fees" do
-      fee = fee_fixture()
-      assert Events.list_fees() == [fee]
-    end
-
-    test "get_fee!/1 returns the fee with given id" do
-      fee = fee_fixture()
-      assert Events.get_fee!(fee.id) == fee
-    end
-
-    test "create_fee/1 with valid data creates a fee" do
-      assert {:ok, %Fee{} = fee} = Events.create_fee(@valid_attrs)
-      assert fee.amount == Decimal.new("120.5")
-      assert fee.name == "some name"
-    end
-
-    test "create_fee/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Events.create_fee(@invalid_attrs)
-    end
-
-    test "update_fee/2 with valid data updates the fee" do
-      fee = fee_fixture()
-      assert {:ok, %Fee{} = fee} = Events.update_fee(fee, @update_attrs)
-      assert fee.amount == Decimal.new("456.7")
-      assert fee.name == "some updated name"
-    end
-
-    test "update_fee/2 with invalid data returns error changeset" do
-      fee = fee_fixture()
-      assert {:error, %Ecto.Changeset{}} = Events.update_fee(fee, @invalid_attrs)
-      assert fee == Events.get_fee!(fee.id)
-    end
-
-    test "delete_fee/1 deletes the fee" do
-      fee = fee_fixture()
-      assert {:ok, %Fee{}} = Events.delete_fee(fee)
-      assert_raise Ecto.NoResultsError, fn -> Events.get_fee!(fee.id) end
-    end
-
-    test "change_fee/1 returns a fee changeset" do
-      fee = fee_fixture()
-      assert %Ecto.Changeset{} = Events.change_fee(fee)
+    test "new_event_with_fees/1 creates an empty changeset with fees loaded" do
+      event = Events.new_event_with_fees()
+      assert length(event.data.event_fee) == length(GateGoat.Fees.list_fees())
     end
   end
 end

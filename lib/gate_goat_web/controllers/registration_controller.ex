@@ -1,25 +1,25 @@
 defmodule GateGoatWeb.RegistrationController do
   use GateGoatWeb, :controller
 
-  alias GateGoat.Events
-  alias GateGoat.Events.Registration
+  alias GateGoat.Registrations
+  alias GateGoat.Registrations.Registration
 
   def index(conn, _params) do
-    registrations = Events.list_registrations_events()
+    registrations = Registrations.list_registrations_events()
     render(conn, "index.html", registrations: registrations)
   end
 
   def new(conn, %{"event_id" => event_id}) do
-    changeset = Events.new_registration_with_fees(event_id)
+    changeset = Registrations.new_registration_with_fees(event_id)
     render(conn, "new.html", changeset: changeset, event_id: event_id)
   end
   def new(conn, _params) do
-    changeset = Events.change_registration(%Registration{})
+    changeset = Registrations.change_registration(%Registration{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"registration" => registration_params, "event_id" => event_id}) do
-    case Events.create_registration(registration_params, event_id) do
+    case Registrations.create_registration(registration_params, event_id) do
       {:ok, registration} ->
         conn
         |> put_flash(:info, "Registration created successfully.")
@@ -30,20 +30,20 @@ defmodule GateGoatWeb.RegistrationController do
   end
 
   def show(conn, %{"id" => id}) do
-    registration = Events.get_registration!(id)
+    registration = Registrations.get_registration!(id)
     render(conn, "show.html", registration: registration)
   end
 
   def edit(conn, %{"id" => id}) do
-    registration = Events.get_registration!(id)
-    changeset = Events.change_registration(registration)
+    registration = Registrations.get_registration!(id)
+    changeset = Registrations.change_registration(registration)
     render(conn, "edit.html", registration: registration, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "registration" => registration_params}) do
-    registration = Events.get_registration!(id)
+    registration = Registrations.get_registration!(id)
 
-    case Events.update_registration(registration, registration_params) do
+    case Registrations.update_registration(registration, registration_params) do
       {:ok, registration} ->
         conn
         |> put_flash(:info, "Registration updated successfully.")
@@ -54,8 +54,8 @@ defmodule GateGoatWeb.RegistrationController do
   end
 
   def delete(conn, %{"id" => id}) do
-    registration = Events.get_registration!(id)
-    {:ok, _registration} = Events.delete_registration(registration)
+    registration = Registrations.get_registration!(id)
+    {:ok, _registration} = Registrations.delete_registration(registration)
 
     conn
     |> put_flash(:info, "Registration deleted successfully.")
