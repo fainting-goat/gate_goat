@@ -1,6 +1,18 @@
 defmodule GateGoat.AdminHelper do
   def admin?(conn) do
-    current_user(conn).role.type == "admin"
+    if conn.assigns[:current_user] != nil do
+      current_user(conn).role.type == "admin"
+    else
+      false
+    end
+  end
+
+  def event_manager?(conn) do
+    if conn.assigns[:current_user] != nil do
+      current_user(conn).role.type == "event_manager"
+    else
+      false
+    end
   end
 
   def user_id(conn) do

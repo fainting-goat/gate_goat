@@ -26,19 +26,27 @@ defmodule GateGoatWeb.Router do
     plug GateGoat.AdminUser
   end
 
+  pipeline :event_manager do
+    plug GateGoat.EventManagerUser
+  end
+
   scope "/", GateGoatWeb do
     pipe_through [:protected, :admin, :browser]
 
-#    post "/activities", ActivityController, :filter
+    resources "/fees", FeeController
+    resources "/users", UserController, only: [:index, :delete, :show, :create, :new]
+    resources "/register", RegistrationController, only: [:index, :delete]
+    resources "/roles", RoleController
+  end
+
+  scope "/", GateGoatWeb do
+    pipe_through [:protected, :event_manager, :browser]
 
     resources "/events", EventController do
       resources "/activities", ActivityController, only: [:create, :new]
     end
 
-    resources "/fees", FeeController
-    resources "/users", UserController, only: [:index, :delete, :show, :create, :new]
-    resources "/register", RegistrationController, only: [:index, :delete]
-    resources "/activities", ActivityController, only: [:delete, :create, :new, :edit, :update]
+    resources "/activities", ActivityController, only: [:index, :delete, :create, :new, :edit, :update]
   end
 
   scope "/", GateGoatWeb do

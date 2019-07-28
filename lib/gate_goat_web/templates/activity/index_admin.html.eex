@@ -48,3 +48,5 @@
 <%= for event <- GateGoat.Events.list_current_events() do %>
   <span><%= link "New Activity for #{event.event_name}", to: Routes.event_activity_path(@conn, :new, event) %></span><br>
 <% end %>
+
+<span><%= link "Back", to: Routes.admin_path(@conn, :index) %></span>

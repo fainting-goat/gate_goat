@@ -8,13 +8,22 @@ defmodule GateGoatWeb.ActivityController do
     activities = Activities.list_activities_for_event(event_id)
 
     conn
-    |> render("index.html", activities: activities)
+    |> render("index.html", activities: activities, event: GateGoat.Events.get_event!(event_id))
     end
   def index(conn, _params) do
-    activities = Activities.list_activities()
+    user = GateGoat.AdminHelper.current_user(conn)
 
-    conn
-    |> render("index_admin.html", activities: activities)
+    if user.role.type == "admin" do
+      activities = Activities.list_activities()
+
+      conn
+      |> render("index_admin.html", activities: activities)
+    else
+      activities = Activities.list_activities_for_event(user.event.id)
+
+      conn
+      |> render("index.html", activities: activities, event: GateGoat.Events.get_event!(user.event.id))
+    end
   end
 
   def new(conn, %{"event_id" => event_id}) do

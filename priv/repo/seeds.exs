@@ -21,8 +21,16 @@ user_role_changeset = Role.changeset(
   }
 )
 
+event_role_changeset = Role.changeset(
+  %Role{},
+  %{
+    type: "event_manager"
+  }
+)
+
 admin_role = Repo.insert!(admin_role_changest)
 user_role = Repo.insert!(user_role_changeset)
+event_role = Repo.insert!(event_role_changeset)
 
 admin_changeset = User.changeset(
   %User{},
@@ -40,8 +48,17 @@ user_changeset = User.changeset(
   }
 )
 
+event_user_changeset = User.changeset(
+  %User{},
+  %{
+    username: "event",
+    password: "eventevent"
+  }
+)
+
 admin = Repo.insert!(admin_changeset) |> Repo.preload(:role)
 user = Repo.insert!(user_changeset) |> Repo.preload(:role)
+event_user = Repo.insert!(event_user_changeset) |> Repo.preload(:role)
 
 admin_change = Ecto.Changeset.change(admin)
 admin_change = Ecto.Changeset.put_assoc(admin_change, :role, admin_role)
@@ -50,6 +67,10 @@ Repo.update!(admin_change)
 user_change = Ecto.Changeset.change(user)
 user_change = Ecto.Changeset.put_assoc(user_change, :role, user_role)
 Repo.update!(user_change)
+
+event_user_change = Ecto.Changeset.change(event_user)
+event_user_change = Ecto.Changeset.put_assoc(event_user_change, :role, event_role)
+Repo.update!(event_user_change)
 
 {:ok, feast_fee} = GateGoat.Fees.create_fee(%{name: "Feast"})
 {:ok, site_fee} =  GateGoat.Fees.create_fee(%{name: "Site"})
