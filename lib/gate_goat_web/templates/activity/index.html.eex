@@ -40,6 +40,9 @@
       <th>Duration</th>
       <th>Description</th>
       <th>Owner</th>
+      <%= if GateGoat.AdminHelper.admin?(@conn) || GateGoat.AdminHelper.event_manager?(@conn) do %>
+       <th></th>
+      <% end %>
 
       <th></th>
     </tr>
@@ -52,6 +55,9 @@
       <td><%= activity.duration %></td>
       <td><%= activity.description %></td>
       <td><%= activity.owner %></td>
+      <%= if GateGoat.AdminHelper.admin?(@conn) || GateGoat.AdminHelper.event_manager?(@conn) do %>
+        <td><%= link "Edit", to: Routes.event_activity_path(@conn, :edit, @event, activity) %></td>
+      <% end %>
     </tr>
 <% end %>
   </tbody>

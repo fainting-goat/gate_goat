@@ -43,7 +43,7 @@ defmodule GateGoatWeb.Router do
     pipe_through [:protected, :event_manager, :browser]
 
     resources "/events", EventController do
-      resources "/activities", ActivityController, only: [:create, :new]
+      resources "/activities", ActivityController, only: [:create, :new, :edit]
     end
 
     resources "/activities", ActivityController, only: [:index, :delete, :create, :new, :edit, :update]
