@@ -65,6 +65,7 @@ defmodule GateGoatWeb.Router do
 
     get "/", GateGoatController, :index
     get "/about", GateGoatController, :about
+    get "/instructions", GateGoatController, :instructions
     get "/event/:id", GateGoatController, :register
     resources "/register", RegistrationController, only: [:show, :create, :new]
     resources "/activities", ActivityController, only: [:index, :show]

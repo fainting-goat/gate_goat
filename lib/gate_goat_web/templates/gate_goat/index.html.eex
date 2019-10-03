@@ -24,4 +24,6 @@
   </tbody>
 </table>
 
+<span><%= link "How to use GateGoat", to: Routes.gate_goat_path(@conn, :instructions) %></span>
+<br>
 <span><%= link "About GateGoat", to: Routes.gate_goat_path(@conn, :about) %></span>
