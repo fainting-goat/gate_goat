@@ -28,7 +28,10 @@
       <td><%= registration.group_name %></td>
       <td>
         <%= for fee <- registration.registration_event_fee do %>
-          <%= GateGoat.Fees.get_event_fee!(fee.event_fee_id).fee.name %><br>
+          <%= if fee.selected do %>
+            <%= GateGoat.Fees.get_event_fee!(fee.event_fee_id).fee.name %>
+            <br>
+           <% end %>
         <% end %>
       </td>
       <td><%= registration.waiver %></td>
