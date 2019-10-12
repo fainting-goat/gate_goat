@@ -35,6 +35,7 @@
         <% end %>
       </td>
       <td><%= registration.waiver %></td>
+      <td><%= registration.verified %></td>
       <td><%= registration.updated_at %></td>
       <td><%= registration.inserted_at %></td>
 
