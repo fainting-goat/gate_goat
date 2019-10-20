@@ -41,15 +41,17 @@
     <%= @registration.member_option %>
   </li>
 
-  <li>
-    <strong>Membership number:</strong>
-    <%= @registration.membership_number %>
-  </li>
+  <%= if @registration.member_option do %>
+    <li>
+      <strong>Membership number:</strong>
+      <%= @registration.membership_number %>
+    </li>
 
-  <li>
-    <strong>Membership expiration date:</strong>
-    <%= GateGoat.Helpers.elixir_to_human_date(@registration.membership_expiration_date) %>
-  </li>
+    <li>
+      <strong>Membership expiration date:</strong>
+      <%= GateGoat.Helpers.elixir_to_human_date(@registration.membership_expiration_date) %>
+    </li>
+  <% end %>
 
   <li>
     <strong>Group name:</strong>
