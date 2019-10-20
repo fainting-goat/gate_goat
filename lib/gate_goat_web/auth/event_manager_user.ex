@@ -1,4 +1,4 @@
-defmodule GateGoat.AdminUser do
+defmodule GateGoat.EventManagerUser do
   use GateGoatWeb, :controller
 
   import Plug.Conn
@@ -10,6 +10,7 @@ defmodule GateGoat.AdminUser do
     user = GateGoat.Users.get_user!(user_id)
 
     case user.role.type do
+      "event_manager" -> conn
       "admin" -> conn
       _ ->
         conn

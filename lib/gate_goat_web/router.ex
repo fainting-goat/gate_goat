@@ -26,13 +26,27 @@ defmodule GateGoatWeb.Router do
     plug GateGoat.AdminUser
   end
 
+  pipeline :event_manager do
+    plug GateGoat.EventManagerUser
+  end
+
   scope "/", GateGoatWeb do
     pipe_through [:protected, :admin, :browser]
 
-    resources "/events", EventController
     resources "/fees", FeeController
     resources "/users", UserController, only: [:index, :delete, :show, :create, :new]
     resources "/register", RegistrationController, only: [:index, :delete]
+    resources "/roles", RoleController
+  end
+
+  scope "/", GateGoatWeb do
+    pipe_through [:protected, :event_manager, :browser]
+
+    resources "/events", EventController do
+      resources "/activities", ActivityController, only: [:create, :new, :edit]
+    end
+
+    resources "/activities", ActivityController, only: [:index, :delete, :create, :new, :edit, :update]
   end
 
   scope "/", GateGoatWeb do
@@ -51,13 +65,20 @@ defmodule GateGoatWeb.Router do
 
     get "/", GateGoatController, :index
     get "/about", GateGoatController, :about
+    get "/instructions", GateGoatController, :instructions
     get "/event/:id", GateGoatController, :register
     resources "/register", RegistrationController, only: [:show, :create, :new]
+    resources "/activities", ActivityController, only: [:index, :show]
+
+    resources "/events", EventController do
+      resources "/activities", ActivityController, only: [:index]
+    end
 
     get "/login", LoginController, :login
     post "/login", LoginController, :login
     post "/logout", LoginController, :logout
   end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", GateGoatWeb do

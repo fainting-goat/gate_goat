@@ -6,6 +6,9 @@
       <tr>
         <td class="text-right">
           <span><%= link "Register", to: Routes.gate_goat_path(@conn, :register, event), class: "button" %></span>
+          <%= unless length(GateGoat.Activities.list_activities_for_event(event.id)) == 0 do %>
+            <span><%= link "View Schedule", to: Routes.event_activity_path(@conn, :index, event), class: "button" %></span>
+          <% end %>
         </td>
         <td>
           <label><%= event.event_name %></label>
@@ -21,4 +24,6 @@
   </tbody>
 </table>
 
+<span><%= link "How to use GateGoat", to: Routes.gate_goat_path(@conn, :instructions) %></span>
+<br>
 <span><%= link "About GateGoat", to: Routes.gate_goat_path(@conn, :about) %></span>
