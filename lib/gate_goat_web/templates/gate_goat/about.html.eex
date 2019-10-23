@@ -3,7 +3,7 @@
 <div>
    <p>GateGoat was designed as a way to help expedite the registration process at events for the Society of Creative
    Anachronism.  It is meant to supplement the paper registration process by allowing people to fill out the registration
-   form on their smart phones.  Currently, Gate Goat only supports individual member registrations while it is in the trial stage.</p>
+   form on their smart phones.  Currently, Gate Goat only supports individual registrations while it is in the trial stage.</p>
 
      <p>Gate Goat is written in Elixir, using the Phoenix framework.  Need to report an issue with Gate Goat?
      Use the SCA grapevine!  A formal feedback system will be developed soon.</p>

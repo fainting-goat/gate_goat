@@ -16,7 +16,7 @@ defmodule GateGoatWeb.RegistrationView do
     Enum.reduce(fees, Decimal.new(0), fn x, acc ->
       add_fees(x.selected, acc, x.event_fee.amount)
     end)
-    |> Decimal.add(get_non_member_surcharge(registration.member_option))
+    |> Decimal.add(remove_member_discount(registration.member_option))
   end
 
   def add_fees(true, total, fee), do: Decimal.add(total, fee)
@@ -45,6 +45,6 @@ defmodule GateGoatWeb.RegistrationView do
     GateGoat.Events.get_event!(event_id).checks_payable
   end
 
-  def get_non_member_surcharge(false), do: Decimal.new(5)
-  def get_non_member_surcharge(true), do: Decimal.new(0)
+  def remove_member_discount(false), do: Decimal.new(5)
+  def remove_member_discount(true), do: Decimal.new(0)
 end

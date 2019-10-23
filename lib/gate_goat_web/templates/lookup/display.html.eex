@@ -1,4 +1,6 @@
-<h3><strong>Payment:</strong> $<%= payment(@registration) %></h3>
+<%= unless GateGoat.Events.free_event?(GateGoat.Events.get_event!(@registration.event_id)) do %>
+  <h3><strong>Payment:</strong> $<%= payment(@registration) %></h3>
+<% end %>
 
 <%= if @registration.verified do %>
   <div><strong>This user is already verified.</strong></div>

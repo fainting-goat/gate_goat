@@ -121,4 +121,9 @@ defmodule GateGoat.Events do
     all_fees = Enum.reduce(GateGoat.Fees.list_fees(), [], fn x, acc ->[%GateGoat.Events.EventFee{fee: x, amount: 0} | acc] end)
     Event.changeset(%Event{event_fee: all_fees}, %{})
   end
+
+  def free_event?(event) do
+    Enum.reject(event.event_fee, fn x -> x.amount == Decimal.new(0) end)
+    |> Enum.empty?
+  end
 end
