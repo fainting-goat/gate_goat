@@ -5,9 +5,11 @@
 
   <hr>
 
-  <h3>Payment</h3>
-  <div>You will pay: $<%= payment(@registration) %></div>
-  <div>Please make all checks out to: <%= checks_payable(@registration.event_id) %></div>
+  <%= unless GateGoat.Events.free_event?(GateGoat.Events.get_event!(@registration.event_id)) do %>
+    <h3>Payment</h3>
+    <div>You will pay: $<%= payment(@registration) %></div>
+    <div>Please make all checks out to: <%= checks_payable(@registration.event_id) %></div>
+  <% end %>
 
   <span><%= link "Back", to: Routes.gate_goat_path(@conn, :index) %></span>
 </ul>

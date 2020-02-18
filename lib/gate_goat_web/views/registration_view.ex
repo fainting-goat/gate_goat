@@ -1,8 +1,6 @@
 defmodule GateGoatWeb.RegistrationView do
   use GateGoatWeb, :view
 
-  #todo: turn boolean into registered/not registered
-
   def render_with_error(type, form, field) do
 
     if form.errors[field] do
@@ -14,10 +12,11 @@ defmodule GateGoatWeb.RegistrationView do
     end
   end
 
-  def payment(%GateGoat.Registrations.Registration{registration_event_fee: fees}) do
+  def payment(%GateGoat.Registrations.Registration{registration_event_fee: fees} = registration) do
     Enum.reduce(fees, Decimal.new(0), fn x, acc ->
       add_fees(x.selected, acc, x.event_fee.amount)
     end)
+    |> Decimal.add(remove_member_discount(registration.member_option))
   end
 
   def add_fees(true, total, fee), do: Decimal.add(total, fee)
@@ -46,6 +45,6 @@ defmodule GateGoatWeb.RegistrationView do
     GateGoat.Events.get_event!(event_id).checks_payable
   end
 
-  def get_non_member_surcharge(false), do: 5
-  def get_non_member_surcharge(true), do: 0
+  def remove_member_discount(false), do: Decimal.new(5)
+  def remove_member_discount(true), do: Decimal.new(0)
 end

@@ -26,15 +26,23 @@ import $ from "jquery"
 $('#registration_member_option_false').click(function () {
     var $membership_number = $("#registration_membership_number");
     var $membership_date = $("#registration_membership_expiration_date");
+    var $membership_label = $("label[for='registration_membership_number']");
+    var $membership_date_label = $("label[for='registration_membership_expiration_date']");
     $membership_number.prop( "disabled", true );
     $membership_date.prop( "disabled", true );
     $membership_number.val('');
     $membership_date.val('');
+    $membership_label.addClass('disabled_color');
+    $membership_date_label.addClass('disabled_color');
 });
 
 $('#registration_member_option_true').click(function () {
     var $membership_number = $("#registration_membership_number");
     var $membership_date = $("#registration_membership_expiration_date");
+    var $membership_label = $("label[for='registration_membership_number']");
+    var $membership_date_label = $("label[for='registration_membership_expiration_date']");
     $membership_number.prop( "disabled", false );
     $membership_date.prop( "disabled", false );
+    $membership_label.removeClass('disabled_color');
+    $membership_date_label.removeClass('disabled_color');
 });
