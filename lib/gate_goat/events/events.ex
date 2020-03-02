@@ -101,6 +101,9 @@ defmodule GateGoat.Events do
 
   """
   def delete_event(%Event{} = event) do
+    query = from p in GateGoat.Events.EventFee, where: p.event_id == ^event.id, select: [:id]
+
+    Repo.delete_all(query)
     Repo.delete(event)
   end
 
