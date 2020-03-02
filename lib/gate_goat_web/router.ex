@@ -35,7 +35,6 @@ defmodule GateGoatWeb.Router do
 
     resources "/fees", FeeController
     resources "/users", UserController, only: [:index, :delete, :show, :create, :new]
-    resources "/register", RegistrationController, only: [:index, :delete]
     resources "/roles", RoleController
   end
 
@@ -46,6 +45,7 @@ defmodule GateGoatWeb.Router do
       resources "/activities", ActivityController, only: [:create, :new, :edit]
     end
 
+    resources "/register", RegistrationController, only: [:index, :delete]
     resources "/activities", ActivityController, only: [:index, :delete, :create, :new, :edit, :update]
   end
 

@@ -40,7 +40,7 @@
       <td><%= registration.inserted_at %></td>
 
       <td class="text-right">
-        <span><%= link "Delete", to: Routes.registration_path(@conn, :delete, registration), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <span><%= link "Delete", to: Routes.registration_path(@conn, :delete, registration), method: :delete, data: [confirm: "Don't actually do this, it's broken right now."], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
 <% end %>

@@ -18,15 +18,20 @@ defmodule GateGoat.Registrations do
   """
   def list_registrations(event_id) do
     Repo.all(from c in Registration, where: c.event_id == ^event_id)
+    |> preload_event_data()
   end
   def list_registrations do
     Repo.all(Registration)
-    |> Repo.preload([:registration_event_fee, {:event, [{:event_fee, :fee}]}])
+    |> preload_event_data()
   end
 
   def list_registrations_events do
     Repo.all(from r in Registration, order_by: r.id)
-    |> Repo.preload([:registration_event_fee, {:event, [{:event_fee, :fee}]}])
+    |> preload_event_data()
+  end
+
+  def preload_event_data(dataset) do
+    Repo.preload(dataset, [:registration_event_fee, {:event, [{:event_fee, :fee}]}])
   end
 
   @doc """

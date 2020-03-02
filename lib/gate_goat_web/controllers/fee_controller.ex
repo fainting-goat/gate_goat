@@ -15,7 +15,7 @@ defmodule GateGoatWeb.FeeController do
   end
 
   def create(conn, %{"fee" => fee_params}) do
-    case Events.create_fee(fee_params) do
+    case Fees.create_fee(fee_params) do
       {:ok, fee} ->
         conn
         |> put_flash(:info, "Fee created successfully.")
