@@ -5,7 +5,11 @@ defmodule GateGoatWeb.RegistrationController do
   alias GateGoat.Registrations.Registration
 
   def index(conn, _params) do
-    registrations = Registrations.list_registrations_events()
+    registrations = if GateGoat.AdminHelper.admin?(conn) do
+      Registrations.list_registrations_events()
+    else
+      Registrations.list_registrations(GateGoat.AdminHelper.current_user(conn).event_id)
+    end
     render(conn, "index.html", registrations: registrations)
   end
 
